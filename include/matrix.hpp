@@ -9,23 +9,42 @@
 using namespace std;
 
 class Matrix{
-private:
-	double **data;
-	
 public:
 	int n_row,n_column;
+	double **data;
 	
+	//Constructores
+	Matrix(const int v_size);
 	Matrix(const int n_row,const int n_column);
 	
-	double& operator () (const int n_row,const int n_column);
-	double& operator + (Matrix&m);
 	
+	
+	// Member Operators
+	double& operator () (const int n);
+	double& operator () (const int n_row,const int n_column);
+	Matrix& operator + (Matrix &m);
+	Matrix& operator + (double s);
+	Matrix& operator - (Matrix &m);
+	Matrix& operator - (double s);
+	Matrix& operator * (Matrix &m);
+	Matrix& operator * (double s);
+	Matrix& operator / (Matrix &m);
+	Matrix& operator / (double s);
+	Matrix& operator = (Matrix &m);
+	
+	
+	
+	// Non-member operators
 	friend ostream& operator << (ostream &o,Matrix&m);
 	
 	
 	
 };
 
-ostream& operator << (ostream &o,Matrix&m);
+// Operator overloading
+ostream& operator << (ostream &o, Matrix &m);
+
+// Methods
+Matrix& zeros(const int n_row, const int n_column);
 
 #endif
