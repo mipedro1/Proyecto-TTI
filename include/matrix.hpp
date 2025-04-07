@@ -32,6 +32,9 @@ public:
 	Matrix& operator / (double s);
 	Matrix& operator = (Matrix &m);
 	
+	Matrix& inv();
+	double det() const;
+
 	
 	
 	// Non-member operators
