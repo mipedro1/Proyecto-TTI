@@ -237,6 +237,10 @@ ostream& operator << (ostream &o, Matrix &m) {
 }
 
 Matrix& zeros(const int n_row, const int n_column) {
+	if (n_row <= 0 || n_column<=0) {
+        cout << "Error in zeros: n_row and n_column must be positive\n";
+        exit(EXIT_FAILURE);
+    }
 	Matrix *m_aux = new Matrix(n_row, n_column);
 	
 	for(int i = 1; i <= n_row; i++) {
@@ -343,6 +347,72 @@ double Matrix::det() const {
     }
 	return 0;
 }
+Matrix& eye(int n) {
+    if (n <= 0) {
+        cout << "Matrix eye: Invalid size n\n";
+        exit(EXIT_FAILURE);
+    }
+	
+	Matrix *m_aux = new Matrix(n, n);
+	
+	for(int i = 1; i <= n; i++) {
+		for(int j = 1; j <= n; j++) {
+			if (i == j) {
+                (*m_aux)(i,j) = 1;
+            } else {
+                (*m_aux)(i,j) = 0;
+            }
+			
+		}
+	}
+	
+	return (*m_aux);
+}
 
+void Matrix::transpose() {
+    Matrix* m_aux = new Matrix(this->n_column, this->n_row);
 
+    
+    for (int i = 1; i <= this->n_row; i++) {
+        for (int j = 1; j <= this->n_column; j++) {
+            (*m_aux)(j, i) = (*this)(i, j);  
+        }
+    }
+
+    
+    *this = *m_aux;
+
+    
+    delete m_aux;
+}
+
+Matrix& zeros(int n) {
+	if (n <= 0) {
+        cout << "Error in zeros: n must be positive\n";
+        exit(EXIT_FAILURE);
+    }
+    Matrix *m_aux = new Matrix(n, n);
+	
+	for(int i = 1; i <= n; i++) {
+		for(int j = 1; j <= n; j++) {
+			(*m_aux)(i,j) = 0;
+		}
+	}
+	
+	return (*m_aux);
+}
+
+double Matrix::norm(){
+    double sum = 0.0;
+
+    
+    for (int i = 1; i < this->n_row; i++) {
+        for (int j = 1; j < this->n_column; j++) {
+            sum += this->data[i][j] * this->data[i][j];
+        }
+    }
+
+    
+    return sqrt(sum);
+}
 

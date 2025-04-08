@@ -34,7 +34,8 @@ public:
 	
 	Matrix& inv();
 	double det() const;
-
+	void transpose();
+	double norm();
 	
 	
 	// Non-member operators
@@ -49,5 +50,11 @@ ostream& operator << (ostream &o, Matrix &m);
 
 // Methods
 Matrix& zeros(const int n_row, const int n_column);
+
+Matrix& eye(int n);
+
+Matrix& zeros(int n);
+
+
 
 #endif

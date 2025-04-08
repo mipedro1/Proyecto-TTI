@@ -274,6 +274,68 @@ int m_det_01() {
     return 0;
 }
 
+int m_eye_01() {
+    int f = 2;
+    int c = 2;
+	
+	Matrix A=eye(2);
+	
+	Matrix B(f,c);
+	B(1,1) = 1; B(1,2) = 0;
+	B(2,1) = 0; B(2,2) = 1;
+    
+    _assert(m_equals(A, B, 1e-10));
+    
+    return 0;
+}
+
+int m_trans_01() {
+    int f = 2;
+    int c = 2;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2;
+	A(2,1) = 3; A(2,2) = 4;
+	
+	A.transpose();
+	Matrix B(f,c);
+	B(1,1) = 1; B(1,2) = 3;
+	B(2,1) = 2; B(2,2) = 4;
+    
+    _assert(m_equals(A, B, 1e-10));
+    
+    return 0;
+}
+int m_zeros_02() {
+    int f = 2;
+    int c = 2;
+	
+	Matrix A=zeros(3);
+	
+	Matrix B(3,3);
+	B(1,1) = 0; B(1,2) = 0; B(1,3)=0;
+	B(2,1) = 0; B(2,2) = 0; B(2,3)=0;
+	B(3,1) = 0; B(3,2) = 0; B(3,3)=0;
+    
+    _assert(m_equals(A, B, 1e-10));
+    
+    return 0;
+}
+int m_norm_01() {
+    int f = 2;
+    int c = 2;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2;
+	A(2,1) = 3; A(2,2) = 4;
+	
+	
+    
+    _assert((A.norm()-5.477)<1e-10);
+    
+    return 0;
+}
+
 int all_tests()
 {
     _verify(m_sum_01);
@@ -288,6 +350,10 @@ int all_tests()
 	_verify(m_inv_01);
 	_verify(m_opigual_01);
 	_verify(m_det_01);
+	_verify(m_eye_01);
+	_verify(m_trans_01);
+	_verify(m_zeros_02);
+	_verify(m_norm_01);
 
     return 0;
 }
