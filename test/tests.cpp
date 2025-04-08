@@ -322,6 +322,90 @@ int m_zeros_02() {
     return 0;
 }
 int m_norm_01() {
+    int f = 1;
+    int c = 3;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2; A(1,3) = -4;
+	
+	
+	
+    
+    _assert((A.norm()-4)<1e-10);
+    
+    return 0;
+}
+int m_dot_01() {
+    int f = 1;
+    int c = 2;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2; 
+	
+	Matrix B(f, c);
+	B(1,1) = 3; B(1,2) = 2;
+	
+    
+    _assert((A.dot(B)-7)<1e-10);
+    
+    return 0;
+}
+int m_cross_01() {
+    int f = 1;
+    int c = 3;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2; A(1,3) = -4;
+	Matrix B(f, c);
+	B(1,1) = 1; B(1,2) = 2; B(1,3) = 3;
+	
+	Matrix C(f, c);
+	C(1,1) = 14; C(1,2) = -7; C(1,3) = 0;
+	
+	
+    
+    _assert(m_equals(C, A.cross(B), 1e-10));
+    
+    return 0;
+}
+int m_extract_01() {
+    int f = 1;
+    int c = 3;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2; A(1,3) = -4;
+	
+	
+	Matrix C(f, 2);
+	C(1,1) = 2; C(1,2) = -4; 
+	
+	
+    
+    _assert(m_equals(C, A.extract_vector(2,3), 1e-10));
+    
+    return 0;
+}
+int m_union_01() {
+    int f = 1;
+    int c = 2;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2; 
+	
+	Matrix B(f, c);
+	B(1,1) = 1; B(1,2) = 2; 
+	
+	
+	Matrix C(f, 4);
+	C(1,1) = 1; C(1,2) = 2;C(1,3) = 1; C(1,4) = 2;  
+	
+	
+    
+    _assert(m_equals(C, A.union_vector(B), 1e-10));
+    
+    return 0;
+}
+int m_exrow_01() {
     int f = 2;
     int c = 2;
 	
@@ -330,8 +414,81 @@ int m_norm_01() {
 	A(2,1) = 3; A(2,2) = 4;
 	
 	
+	
+	
+	Matrix C(1,2);
+	C(1,1) = 3; C(1,2) = 4;
+	
+	
     
-    _assert((A.norm()-5.477)<1e-10);
+    _assert(m_equals(C, A.extract_row(2), 1e-10));
+    
+    return 0;
+}
+int m_excol_01() {
+    int f = 2;
+    int c = 2;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2;
+	A(2,1) = 3; A(2,2) = 4;
+	
+	
+	
+	
+	Matrix C(1,2);
+	C(1,1) = 2; C(1,2) = 4;
+	
+	
+    
+    _assert(m_equals(C, A.extract_column(2), 1e-10));
+    
+    return 0;
+}
+int m_assrow_01() {
+    int f = 2;
+    int c = 2;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2;
+	A(2,1) = 3; A(2,2) = 4;
+	
+	Matrix B(1,2);
+	B(1,1)= 2; B(1,2)= 2;
+	
+	
+	
+	Matrix C(f,c);
+	C(1,1) = 1; C(1,2) = 2;
+	C(2,1) = 2; C(2,2) = 2;
+	
+	
+    
+    _assert(m_equals(C, A.assign_row(2,B), 1e-10));
+    
+    return 0;
+}
+int m_asscol_01() {
+    int f = 2;
+    int c = 2;
+	
+	Matrix A(f, c);
+	A(1,1) = 1; A(1,2) = 2;
+	A(2,1) = 3; A(2,2) = 4;
+	
+	Matrix B(2,1);
+	B(1,1)= 2;
+	B(2,1)= 2;
+	
+	
+	
+	Matrix C(f,c);
+	C(1,1) = 1; C(1,2) = 2;
+	C(2,1) = 3; C(2,2) = 2;
+	
+	
+    
+    _assert(m_equals(C, A.assign_column(2,B), 1e-10));
     
     return 0;
 }
@@ -354,6 +511,15 @@ int all_tests()
 	_verify(m_trans_01);
 	_verify(m_zeros_02);
 	_verify(m_norm_01);
+	_verify(m_dot_01);
+	_verify(m_cross_01);
+	_verify(m_extract_01);
+	_verify(m_union_01);
+	_verify(m_exrow_01);
+	_verify(m_excol_01);
+	_verify(m_assrow_01);
+	_verify(m_asscol_01);
+	
 
     return 0;
 }

@@ -36,6 +36,14 @@ public:
 	double det() const;
 	void transpose();
 	double norm();
+	double dot(Matrix& m);
+	Matrix& cross(Matrix& m);
+	Matrix& extract_vector(int indiceInicio, int indiceFinal);
+	Matrix& union_vector(Matrix& m);
+	Matrix& extract_row(int n);
+	Matrix& extract_column(int n);
+	Matrix& assign_row(int n, Matrix& m);
+	Matrix& assign_column(int n, Matrix& m);
 	
 	
 	// Non-member operators

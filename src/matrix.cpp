@@ -402,17 +402,141 @@ Matrix& zeros(int n) {
 	return (*m_aux);
 }
 
-double Matrix::norm(){
-    double sum = 0.0;
+double Matrix::norm() {
+    if (this->n_row != 1) {
+        cout << "Error in norm: The matrix must have exactly one row\n";
+        exit(EXIT_FAILURE);
+    }
+
+    double max = abs((*this)(1, 1));
 
     
-    for (int i = 1; i < this->n_row; i++) {
-        for (int j = 1; j < this->n_column; j++) {
-            sum += this->data[i][j] * this->data[i][j];
+    for (int j = 1; j < this->n_column; j++) {
+        if ((abs((*this)(1, j)) > max)) {
+            max = abs((*this)(1, j));
         }
     }
 
-    
-    return sqrt(sum);
+    return max;  
 }
+
+double Matrix::dot(Matrix& m) {
+    if (this->n_row != 1 || m.n_row != 1 || this->n_column != m.n_column) {
+        cout << "Dot product: Vectors must have the same number of columns and must be row vectors.\n";
+        exit(EXIT_FAILURE);
+    }
+
+    double result = 0.0;
+
+    for (int j = 1; j <= this->n_column; j++) {
+        result += (*this)(1, j) * m(1, j); 		
+    }
+
+    return result;
+}
+
+Matrix& Matrix::cross(Matrix& m){
+    if (this->n_row != 1 || this->n_column != 3 || m.n_row != 1 || m.n_column != 3) {
+        cout << "Cross product: Both matrices must be row vectors of dimension 3.\n";
+        exit(EXIT_FAILURE);
+    }
+
+    
+    Matrix* result = new Matrix(1, 3);
+
+    
+    (*result)(1, 1) = (*this)(1, 2) * m(1, 3) - (*this)(1, 3) * m(1, 2);  
+    (*result)(1, 2) = (*this)(1, 3) * m(1, 1) - (*this)(1, 1) * m(1, 3);  
+    (*result)(1, 3) = (*this)(1, 1) * m(1, 2) - (*this)(1, 2) * m(1, 1);  
+
+    return *result;
+	
+}
+
+Matrix& Matrix::extract_vector(int indiceInicio, int indiceFinal) {
+    if (indiceInicio < 1 || indiceFinal > this->n_column || indiceInicio > indiceFinal) {
+        cout << "Error: Invalid index range\n";
+        exit(EXIT_FAILURE);
+    }
+
+    int tamañoVector = indiceFinal - indiceInicio + 1;
+    Matrix* subvector = new Matrix(1, tamañoVector);
+
+    for (int i = indiceInicio; i <= indiceFinal; i++) {
+        (*subvector)(1, i - indiceInicio + 1) = (*this)(1, i);
+    }
+
+    return *subvector;
+}
+
+Matrix& Matrix::union_vector(Matrix& m) {
+    if (this->n_row != 1 || m.n_row != 1) {
+		 cout << "Error: Invalid index range\n";
+        exit(EXIT_FAILURE);
+    }
+
+    int n_column = this->n_column + m.n_column;
+    Matrix* result = new Matrix(1, n_column);
+
+    for (int i = 0; i < this->n_column; i++) {
+        (*result)(1, i + 1) = (*this)(1, i + 1);
+    }
+
+    for (int i = 0; i < m.n_column; i++) {
+        (*result)(1, this->n_column + i + 1) = m(1, i + 1);
+    }
+
+    return *result;
+}
+Matrix& Matrix::extract_row(int n) {
+    if (n <= 0 || n > this->n_row) {
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix* result = new Matrix(1, this->n_column);
+
+    for (int i = 0; i < this->n_column; i++) {
+        (*result)(1, i + 1) = (*this)(n, i + 1);
+    }
+
+    return *result;
+}
+Matrix& Matrix::extract_column(int n) {
+    if (n <= 0 || n > this->n_column) {
+        exit(EXIT_FAILURE);
+    }
+
+    Matrix* result = new Matrix(1, this->n_row);
+
+    for (int i = 0; i < this->n_row; i++) {
+        (*result)(1, i + 1) = (*this)(i + 1, n);
+    }
+
+    return *result;
+}
+
+Matrix& Matrix::assign_row(int n, Matrix& m) {
+    if (n <= 0 || n > this->n_row || m.n_column != this->n_column) {
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < this->n_column; i++) {
+        (*this)(n, i + 1) = m(1, i + 1);
+    }
+
+    return *this;
+}
+
+Matrix& Matrix::assign_column(int n, Matrix& m) {
+    if (n <= 0 || n > this->n_column || m.n_row != this->n_row) {
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < this->n_row; i++) {
+        (*this)(i + 1, n) = m(i + 1, 1);
+    }
+
+    return *this;
+}
+
 
