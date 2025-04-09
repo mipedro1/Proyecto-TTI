@@ -402,22 +402,16 @@ Matrix& zeros(int n) {
 	return (*m_aux);
 }
 
-double Matrix::norm() {
-    if (this->n_row != 1) {
-        cout << "Error in norm: The matrix must have exactly one row\n";
-        exit(EXIT_FAILURE);
-    }
+double norm(Matrix& m) {
+    double sum = 0.0;
 
-    double max = abs((*this)(1, 1));
-
-    
-    for (int j = 1; j < this->n_column; j++) {
-        if ((abs((*this)(1, j)) > max)) {
-            max = abs((*this)(1, j));
+    for (int i = 1; i <= m.n_row; ++i) {
+        for (int j = 1; j <= m.n_column; ++j) {
+            sum += pow(m(i, j), 2);
         }
     }
 
-    return max;  
+    return sqrt(sum);  
 }
 
 double Matrix::dot(Matrix& m) {

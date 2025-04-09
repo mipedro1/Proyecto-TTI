@@ -1,6 +1,10 @@
 #include "../include/matrix.hpp"
+#include "../include/R_x.hpp"
 
 int main(){
+	Matrix aux= R_x(3);
+	cout << "aux\n" << aux << "\n";
+	
 	Matrix v(3);
 	v(2)=5;
 	cout<<v;
@@ -13,9 +17,9 @@ int main(){
 	
 	Matrix M3= M1+M2;
 	
-	cout << M1 << endl;
-	cout << M2 << endl;
-	cout << M3 << endl;
+	cout << "M1\n" << M1 << "\n";
+	cout << "M2\n" << M2 << "\n";
+	cout << "M3\n" << M3 << "\n";
 	
 	
 	return 0;

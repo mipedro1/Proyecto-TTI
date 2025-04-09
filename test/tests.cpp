@@ -1,4 +1,8 @@
 #include "..\include\matrix.hpp"
+#include "..\include\R_x.hpp"
+#include "..\include\R_y.hpp"
+#include "..\include\R_z.hpp"
+#include "..\include\AccelPointMass.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -326,12 +330,12 @@ int m_norm_01() {
     int c = 3;
 	
 	Matrix A(f, c);
-	A(1,1) = 1; A(1,2) = 2; A(1,3) = -4;
+	A(1,1) = 1; A(1,2) = 2; A(1,3) = 3;
 	
 	
 	
     
-    _assert((A.norm()-4)<1e-10);
+    _assert((norm(A)-3.74165738677394)<1e-10);
     
     return 0;
 }
@@ -492,6 +496,79 @@ int m_asscol_01() {
     
     return 0;
 }
+int I1_R_x_01() {
+    
+	
+	
+	Matrix A(3, 3);
+	A(1,1) = 1; A(1,2) = 0; A(1,3)=0;
+	A(2,1) = 0; A(2,2) = -0.989992496600445 ; A(2,3)=0.141120008059867;
+	A(3,1) = 0; A(3,2) = -0.141120008059867; A(3,3)= -0.989992496600445;
+	        
+	       
+	Matrix B= R_x(3);
+	
+	
+    _assert(m_equals(A,B, 1e-10));
+    
+    return 0;
+}
+int I1_R_y_01() {
+    
+	
+	
+	Matrix A(3, 3);
+	A(1,1) = -0.989992496600445; A(1,2) = 0; A(1,3)=-0.141120008059867;
+	A(2,1) = 0; A(2,2) =  1; A(2,3)=0;
+	A(3,1) = 0.141120008059867; A(3,2) =0 ; A(3,3)= -0.989992496600445;
+	        
+	       
+	Matrix B= R_y(3);
+	
+	
+    _assert(m_equals(A,B, 1e-10));
+    
+    return 0;
+}
+int I1_R_z_01() {
+    
+	
+	
+	Matrix A(3, 3);
+	A(1,1) = -0.989992496600445; A(1,2) = 0.141120008059867; A(1,3)=0;
+	A(2,1) = -0.141120008059867; A(2,2) = -0.989992496600445 ; A(2,3)=0;
+	A(3,1) = 0; A(3,2) = 0; A(3,3)= 1;
+	        
+	       
+	Matrix B= R_z(3);
+	
+	
+    _assert(m_equals(A,B, 1e-10));
+    
+    return 0;
+}
+int I1_AccelPointMass_01() {
+    
+	
+	
+	Matrix A(1, 3);
+	A(1,1) =1; A(1,2) =2; A(1,3)=3;
+	
+	Matrix B(1, 3);
+	B(1,1) =4; B(1,2) =5; B(1,3)=6;
+	 
+	double g=9.876;
+	       
+	Matrix C=AccelPointMass(A, B,g);
+	
+	Matrix D(1,3);
+	D(1,1)=0.152715682717329; D(1,2)=0.138099128780766; D(1,3)=0.123482574844203;
+	
+	
+    _assert(m_equals(C,D, 1e-10));
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -519,7 +596,10 @@ int all_tests()
 	_verify(m_excol_01);
 	_verify(m_assrow_01);
 	_verify(m_asscol_01);
-	
+	_verify(I1_R_x_01);
+	_verify(I1_R_y_01);
+	_verify(I1_R_z_01);
+	_verify(I1_AccelPointMass_01);
 
     return 0;
 }

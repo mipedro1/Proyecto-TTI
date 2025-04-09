@@ -35,7 +35,7 @@ public:
 	Matrix& inv();
 	double det() const;
 	void transpose();
-	double norm();
+	
 	double dot(Matrix& m);
 	Matrix& cross(Matrix& m);
 	Matrix& extract_vector(int indiceInicio, int indiceFinal);
@@ -63,6 +63,7 @@ Matrix& eye(int n);
 
 Matrix& zeros(int n);
 
+double norm(Matrix& m);
 
 
 #endif
