@@ -3,6 +3,8 @@
 #include "..\include\R_y.hpp"
 #include "..\include\R_z.hpp"
 #include "..\include\AccelPointMass.hpp"
+#include "..\include\Cheb3D.hpp"
+#include "..\include\EccAnom.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -569,6 +571,44 @@ int I1_AccelPointMass_01() {
     
     return 0;
 }
+int I1_Cheb3D_01() {
+    
+	
+	
+	Matrix A(1, 5);
+	A(1,1) =0.0; A(1,2) =1.0; A(1,3)=0.5;A(1,4)=0.25;A(1,5)=0.1;
+	
+	Matrix B(1, 5);
+	B(1,1) =0.0; B(1,2) =0.9; B(1,3)=0.4;B(1,4)=0.3;B(1,5)=0.2;
+	
+	Matrix C(1, 5);
+	C(1,1) =0.0; C(1,2) =0.7; C(1,3)=0.6;C(1,4)=0.1;C(1,5)=0.05;
+	 
+	
+	       
+	Matrix E=Cheb3D(0.5,5,0.0,1.0,A,B,C);
+	
+	Matrix D(1,3);
+	D(1,1)=-0.4000; D(1,2)=-0.2000; D(1,3)= -0.5500;
+	
+	
+    _assert(m_equals(E,D, 1e-10));
+    
+    return 0;
+}
+
+int I1_EccAnom_01() {
+    
+	       
+	double E=EccAnom(0.5,0);
+	
+	
+	
+	
+    _assert( (fabs(E-0.5000))<1e-10);
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -600,6 +640,8 @@ int all_tests()
 	_verify(I1_R_y_01);
 	_verify(I1_R_z_01);
 	_verify(I1_AccelPointMass_01);
+	_verify(I1_Cheb3D_01);
+	_verify(I1_EccAnom_01);
 
     return 0;
 }
