@@ -1,6 +1,12 @@
 #include "../include/matrix.hpp"
 
 
+Matrix::Matrix(){
+	this->n_row=0;
+	this->n_column=0;
+	this->data= nullptr;
+}
+
 Matrix::Matrix(const int v_size){
 	if(v_size<0){
 		cout << "Vector create: error in v_size \n";

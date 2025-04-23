@@ -5,6 +5,11 @@
 #include "..\include\AccelPointMass.hpp"
 #include "..\include\Cheb3D.hpp"
 #include "..\include\EccAnom.hpp"
+#include "..\include\Frac.hpp"
+#include "..\include\MeanObliquity.hpp"
+#include "..\include\Mjday.hpp"
+#include "..\include\Mjday_TDB.hpp"
+#include "..\include\Position.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -609,6 +614,50 @@ int I1_EccAnom_01() {
     
     return 0;
 }
+int I1_Frac_01() {
+    
+	       
+	double F=Frac(4.596);
+	
+	
+	
+	
+    _assert( (fabs(F-0.596))<1e-10);
+    
+    return 0;
+}
+int I1_MeanObl_01() {
+    
+	double M=MeanObliquity(58000.0); 
+    _assert( (fabs(M-0.40905268985035))<1e-10);
+    
+    return 0;
+}
+
+int I1_Mjday_01() {
+    
+	double M=Mjday(2000, 1, 1, 0, 0, 0.0); 
+    _assert( (fabs(M-51544))<1e-10);
+    
+    return 0;
+}
+
+int I1_MjdayTDB_01() {
+    
+	double M=Mjday_TDB(59900.0); 
+    _assert( (fabs(M-59899.9999999855))<1e-10);
+    
+    return 0;
+}
+int I1_Position_01() {
+    
+	Matrix M(3);
+	M(1,1) =6378136.3; M(1,2) =0; M(1,3)=0;
+	Matrix r= Position(0,0,0);
+    _assert(m_equals(M,r, 1e-10));
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -642,6 +691,11 @@ int all_tests()
 	_verify(I1_AccelPointMass_01);
 	_verify(I1_Cheb3D_01);
 	_verify(I1_EccAnom_01);
+	_verify(I1_Frac_01);
+	_verify(I1_MeanObl_01);
+	_verify(I1_Mjday_01);
+	_verify(I1_MjdayTDB_01);
+	_verify(I1_Position_01);
 
     return 0;
 }

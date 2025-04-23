@@ -1,11 +1,10 @@
-#ifndef _EccAnom_
-#define _EccAnom_
+#ifndef _MeanObliquity_
+#define _MeanObliquity_
 
 #include "..\include\matrix.hpp"
 #include <cmath>
-#include <cfloat>
 #include "..\include\SAT_Const.hpp"
 
-double EccAnom (double M, double e);
+double MeanObliquity (double Mjd_TT);
 
 #endif

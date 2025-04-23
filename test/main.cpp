@@ -1,7 +1,10 @@
 #include "../include/matrix.hpp"
 #include "../include/R_x.hpp"
+#include "../include/global.hpp"
 
 int main(){
+	eop19620101(4); // c=21413
+	cout<< "eopdata\n"<<eopdata<<"\n";
 	Matrix aux= R_x(3);
 	cout << "aux\n" << aux << "\n";
 	

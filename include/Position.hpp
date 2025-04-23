@@ -1,11 +1,10 @@
-#ifndef _EccAnom_
-#define _EccAnom_
+#ifndef _Position_
+#define _Position_
 
 #include "..\include\matrix.hpp"
 #include <cmath>
-#include <cfloat>
 #include "..\include\SAT_Const.hpp"
 
-double EccAnom (double M, double e);
+Matrix Position(double lon,double  lat, double h);
 
 #endif

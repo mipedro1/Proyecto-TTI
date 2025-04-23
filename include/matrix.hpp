@@ -14,6 +14,7 @@ public:
 	double **data;
 	
 	//Constructores
+	Matrix();
 	Matrix(const int v_size);
 	Matrix(const int n_row,const int n_column);
 	
