@@ -13,6 +13,7 @@
 #include "..\include\sign_.hpp"
 #include "..\include\timediff.hpp"
 #include "..\include\AzElPa.hpp"
+#include "..\include\NutAngles.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -715,6 +716,22 @@ int I1_AzElPa_01() {
     return 0;
 }
 
+int I1_NutAngles_01() {
+    
+	
+    double Mjd_TT=3.0;
+    auto [dpsi, deps] = NutAngles (Mjd_TT);
+	double DPSI=2.72256565175042e-05;
+	double DEPS=3.87947551912632e-05;
+	
+    _assert( (fabs(DPSI-(dpsi)))<1e-10);
+	_assert( (fabs(DEPS-(deps)))<1e-10);
+
+
+    
+    return 0;
+}
+
 int all_tests()
 {
     _verify(m_sum_01);
@@ -755,6 +772,8 @@ int all_tests()
 	_verify(I1_sign__01);
 	_verify(I1_timediff_01);
 	_verify(I1_AzElPa_01);
+	
+	_verify(I1_NutAngles_01);
 
     return 0;
 }
