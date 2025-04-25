@@ -10,6 +10,9 @@
 #include "..\include\Mjday.hpp"
 #include "..\include\Mjday_TDB.hpp"
 #include "..\include\Position.hpp"
+#include "..\include\sign_.hpp"
+#include "..\include\timediff.hpp"
+#include "..\include\AzElPa.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -658,6 +661,59 @@ int I1_Position_01() {
     
     return 0;
 }
+int I1_sign__01() {
+    
+	double M=sign_(5.0,-3.0); 
+    _assert( (fabs(M-(-5)))<1e-10);
+    
+    return 0;
+}
+int I1_timediff_01() {
+    
+	double UT1_UTC = 0.0;  
+    double TAI_UTC = 37.0;       
+    
+    
+    auto [UT1_TAI, UTC_GPS, UT1_GPS, TT_UTC, GPS_UTC] = timediff(UT1_UTC, TAI_UTC);
+	double ut1_tai=-37;
+	double utc_gps=-18;
+	double ut1_gps=-18;
+	double tt_utc=69.184;
+	double gps_utc=18;
+	
+    _assert( (fabs(UT1_TAI-(ut1_tai)))<1e-10);
+	_assert( (fabs(UTC_GPS-(utc_gps)))<1e-10);
+	_assert( (fabs(UT1_GPS-(ut1_gps)))<1e-10);
+    _assert( (fabs(TT_UTC-(tt_utc)))<1e-10);
+    _assert( (fabs(GPS_UTC-(gps_utc)))<1e-10);
+
+
+    
+    return 0;
+}
+int I1_AzElPa_01() {
+    
+	Matrix s(3);       
+    s(1,1)=1000;s(1,2)=2000;s(1,3)=500;
+    
+    auto [Az, El, dAds, dEds] = AzElPa(s);
+	double az=0.463647609000806;
+	double el=0.219987977395459;
+	Matrix dads(3);
+	dads(1,1)=0.0004;dads(1,2)=-0.0002;dads(1,3)=0;
+	
+	Matrix deds(3);
+	deds(1,1)=-4.2591770999996e-05;deds(1,2)=-8.5183541999992e-05;deds(1,3)=0.00042591770999996;
+	
+    _assert( (fabs(Az-(az)))<1e-10);
+	_assert( (fabs(El-(el)))<1e-10);
+    _assert(m_equals(dAds,dads, 1e-10));
+	_assert(m_equals(dEds,deds, 1e-10));
+
+
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -696,6 +752,9 @@ int all_tests()
 	_verify(I1_Mjday_01);
 	_verify(I1_MjdayTDB_01);
 	_verify(I1_Position_01);
+	_verify(I1_sign__01);
+	_verify(I1_timediff_01);
+	_verify(I1_AzElPa_01);
 
     return 0;
 }
