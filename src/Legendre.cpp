@@ -29,9 +29,11 @@ tuple<Matrix&,Matrix&> Legendre(int n,int m,double fi){
 	int j=0;
 	int k=2;
 	while(1){
-		for (int i = k; i <= n; i++) {        
-			pnm(i+1,j+1)=sqrt((2*i+1)/((i-j)*(i+j)))*((sqrt(2*i-1)*sin(fi)*pnm(i,j+1))
-				-(sqrt(((i+j-1)*(i-j-1))/(2*i-3))*pnm(i-1,j+1)));
+		for (int i = k; i <= n; i++) { 
+			if ((i - j) != 0 && (i + j) != 0 && (2 * i - 3) != 0) {		
+				pnm(i+1,j+1)=sqrt((2.0 * i + 1) / ((i - j) * (i + j)))*((sqrt(2.0 * i - 1) * sin(fi) * pnm(i, j + 1))
+					-(sqrt(((i + j - 1.0) * (i - j - 1.0)) / (2.0 * i - 3.0)) * pnm(i - 1, j + 1)));
+			}
 		}
 		j = j+1;
 		k = k+1;
@@ -43,8 +45,10 @@ tuple<Matrix&,Matrix&> Legendre(int n,int m,double fi){
 	k = 2;
 	while(1){
 		for (int i = k; i <= n; i++) {        
-			dpnm(i+1,j+1)=sqrt((2*i+1)/((i-j)*(i+j)))*((sqrt(2*i-1)*sin(fi)*dpnm(i,j+1))
-				 +(sqrt(2*i-1)*cos(fi)*pnm(i,j+1))-(sqrt(((i+j-1)*(i-j-1))/(2*i-3))*dpnm(i-1,j+1)));
+			if ((i - j) != 0 && (i + j) != 0 && (2 * i - 3) != 0) {
+			dpnm(i+1,j+1)=sqrt((2.0 * i + 1) / ((i - j) * (i + j)))*((sqrt(2.0 * i - 1) * sin(fi) * dpnm(i, j + 1))
+				 +(sqrt(2.0 * i - 1) * cos(fi) * pnm(i, j + 1))-(sqrt(((i + j - 1.0) * (i - j - 1.0)) / (2.0 * i - 3.0)) * dpnm(i - 1, j + 1)));
+			}
 		}
 		j = j+1;
 		k = k+1;
