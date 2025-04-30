@@ -1,6 +1,6 @@
 #include "..\include\AzElPa.hpp"
 
-tuple<double,double,Matrix,Matrix> AzElPa(Matrix s){
+tuple<double,double,Matrix&,Matrix&> AzElPa(Matrix& s){
 	
 	double pi2 = 2.0*M_PI;
 
@@ -16,16 +16,16 @@ tuple<double,double,Matrix,Matrix> AzElPa(Matrix s){
 	double El = atan ( s(3) / rho );
 
 	// Partials
-	Matrix dAds(3);
+	Matrix &dAds = zeros(3);
 	dAds(1,1) =  s(2)/(rho*rho);
 	dAds(1,2)=-s(1)/(rho*rho);
 	dAds(1,3)=0.0;
-	Matrix dEds(3);
+	Matrix &dEds = zeros(3);
 	dEds(1,1)=-s(1)*s(3)/rho;
 	dEds(1,2)=-s(2)*s(3)/rho;
 	dEds(1,3)=rho;
 	dEds = dEds / s.dot(s);
 	
-	return make_tuple(Az, El, dAds, dEds);
+	return tie(Az, El, dAds, dEds);
 	
 }

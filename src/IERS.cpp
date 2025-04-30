@@ -1,27 +1,34 @@
 #include "..\include\IERS.hpp"
 
-tuple<double,double,double,double,double,double,double,double,double> IERS(Matrix eop,double Mjd_UTC,char interp='n'){
+tuple<double,double,double,double,double,double,double,double,double> IERS(double Mjd_UTC,char interp='n'){
 	
-
+	double mjd, mfme, fixf, x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC;
+	int i;
 	if (interp =='l'){
 		// linear interpolation
-		double mjd = (floor(Mjd_UTC));
-		double i = find(mjd==eop(4,:),1,'first');
-		Matrix preeop = eop(:,i);
-		Matrix nexteop = eop(:,i+1);
-		double mfme = 1440*(Mjd_UTC-floor(Mjd_UTC));
-		double fixf = mfme/1440;
+		mjd = (floor(Mjd_UTC));
+		i = -1;  
+		for (int j = 1; j <= eopdata.n_column; j++) {
+			if (mjd == eopdata(4, j)) {
+				i = j;  
+				break;   
+			}
+		}
+		Matrix preeopdata = eopdata.extract_column(i);      
+		Matrix nexteopdata = eopdata.extract_column(i+1);   
+		 mfme = 1440*(Mjd_UTC-floor(Mjd_UTC));
+		 fixf = mfme/1440;
 		// Setting of IERS Earth rotation parameters
 		// (UT1-UTC [s], TAI-UTC [s], x ["], y ["])
-		double x_pole  = preeop(5)+(nexteop(5)-preeop(5))*fixf;
-		double y_pole  = preeop(6)+(nexteop(6)-preeop(6))*fixf;
-		double UT1_UTC = preeop(7)+(nexteop(7)-preeop(7))*fixf;
-		double LOD     = preeop(8)+(nexteop(8)-preeop(8))*fixf;
-		double dpsi    = preeop(9)+(nexteop(9)-preeop(9))*fixf;
-		double deps    = preeop(10)+(nexteop(10)-preeop(10))*fixf;
-		double dx_pole = preeop(11)+(nexteop(11)-preeop(11))*fixf;
-		double dy_pole = preeop(12)+(nexteop(12)-preeop(12))*fixf;
-		double TAI_UTC = preeop(13);
+		 x_pole  = preeopdata(5)+(nexteopdata(5)-preeopdata(5))*fixf;
+		 y_pole  = preeopdata(6)+(nexteopdata(6)-preeopdata(6))*fixf;
+		 UT1_UTC = preeopdata(7)+(nexteopdata(7)-preeopdata(7))*fixf;
+		 LOD     = preeopdata(8)+(nexteopdata(8)-preeopdata(8))*fixf;
+		 dpsi    = preeopdata(9)+(nexteopdata(9)-preeopdata(9))*fixf;
+		 deps    = preeopdata(10)+(nexteopdata(10)-preeopdata(10))*fixf;
+		 dx_pole = preeopdata(11)+(nexteopdata(11)-preeopdata(11))*fixf;
+		 dy_pole = preeopdata(12)+(nexteopdata(12)-preeopdata(12))*fixf;
+		 TAI_UTC = preeopdata(13);
 		
 		x_pole  = x_pole/Arcs;  // Pole coordinate [rad]
 		y_pole  = y_pole/Arcs;  // Pole coordinate [rad]
@@ -31,20 +38,26 @@ tuple<double,double,double,double,double,double,double,double,double> IERS(Matri
 		dy_pole = dy_pole/Arcs; // Pole coordinate [rad]
 	}else if (interp =='n') {   
 		mjd = (floor(Mjd_UTC));
-		i = find(mjd==eop(4,:),1,'first');
-		eop = eop(:,i);
+		int i = -1;
+		for (int j = 0; j < eopdata.n_column; j++) {
+			if (eopdata(4, j) == mjd) {
+				i = j;
+				break;  
+			}
+		}
+		Matrix eopdata_col = eopdata.extract_column(i);
 		// Setting of IERS Earth rotation parameters
 		// (UT1-UTC [s], TAI-UTC [s], x ["], y ["])
-		x_pole  = eop(5)/Arcs;  // Pole coordinate [rad]
-		y_pole  = eop(6)/Arcs;  // Pole coordinate [rad]
-		UT1_UTC = eop(7);             // UT1-UTC time difference [s]
-		LOD     = eop(8);             // Length of day [s]
-		dpsi    = eop(9)/Arcs;
-		deps    = eop(10)/Arcs;
-		dx_pole = eop(11)/Arcs; // Pole coordinate [rad]
-		dy_pole = eop(12)/Arcs; // Pole coordinate [rad]
-		TAI_UTC = eop(13);            // TAI-UTC time difference [s]
+		x_pole  = eopdata(5)/Arcs;  // Pole coordinate [rad]
+		y_pole  = eopdata(6)/Arcs;  // Pole coordinate [rad]
+		UT1_UTC = eopdata(7);             // UT1-UTC time difference [s]
+		LOD     = eopdata(8);             // Length of day [s]
+		dpsi    = eopdata(9)/Arcs;
+		deps    = eopdata(10)/Arcs;
+		dx_pole = eopdata(11)/Arcs; // Pole coordinate [rad]
+		dy_pole = eopdata(12)/Arcs; // Pole coordinate [rad]
+		TAI_UTC = eopdata(13);            // TAI-UTC time difference [s]
 	}
 	
-	return make_tuple(x_pole,y_pole,UT1_UTC,LOD,dpsi,deps,dx_pole,dy_pole,TAI_UTC);
+	return tie(x_pole,y_pole,UT1_UTC,LOD,dpsi,deps,dx_pole,dy_pole,TAI_UTC);
 }

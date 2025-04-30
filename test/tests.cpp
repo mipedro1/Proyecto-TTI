@@ -14,6 +14,9 @@
 #include "..\include\timediff.hpp"
 #include "..\include\AzElPa.hpp"
 #include "..\include\NutAngles.hpp"
+#include "..\include\IERS.hpp"
+#include "../include/global.hpp"
+#include "..\include\Legendre.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -700,10 +703,10 @@ int I1_AzElPa_01() {
     auto [Az, El, dAds, dEds] = AzElPa(s);
 	double az=0.463647609000806;
 	double el=0.219987977395459;
-	Matrix dads(3);
+	Matrix &dads=zeros(3);
 	dads(1,1)=0.0004;dads(1,2)=-0.0002;dads(1,3)=0;
 	
-	Matrix deds(3);
+	Matrix &deds=zeros(3);
 	deds(1,1)=-4.2591770999996e-05;deds(1,2)=-8.5183541999992e-05;deds(1,3)=0.00042591770999996;
 	
     _assert( (fabs(Az-(az)))<1e-10);
@@ -721,11 +724,63 @@ int I1_NutAngles_01() {
 	
     double Mjd_TT=3.0;
     auto [dpsi, deps] = NutAngles (Mjd_TT);
-	double DPSI=2.72256565175042e-05;
-	double DEPS=3.87947551912632e-05;
+	double DP=2.72256565175042e-05;
+	double DE=3.87947551912632e-05;
+    _assert( (fabs(DP-(dpsi)))<1e-10);
+	_assert( (fabs(DE-(deps)))<1e-10);
+
+
+    
+    return 0;
+}
+
+int I1_IERS_01() {
+    
+	double Mjd_UTC =49746.1101504629;
+    auto [x_pole,y_pole,UT1_UTC,LOD,dpsi,deps,dx_pole,dy_pole,TAI_UTC] = IERS (Mjd_UTC,'l');
+	double x=-5.59386183152189e-07;
+	double y=2.33554438440373e-06;
+	double utl=0.325764698106523;
+	double l=0.00272668635763815;
+	double dp=-1.16881960640421e-07     ;
+	double de=-2.47881680412219e-08;
+	double dx=-8.41764150670523e-10     ;
+	double dy=-1.56618880121342e-09;
+	double tai=29;
+    _assert( (fabs(x_pole-(x)))<1e-10);
+	_assert( (fabs(y_pole-(y)))<1e-10);
+	_assert( (fabs(utl-(UT1_UTC)))<1e-10);
+	_assert( (fabs(l-(LOD)))<1e-10);
+	_assert( (fabs(dp-(dpsi)))<1e-10);
+	_assert( (fabs(de-(deps)))<1e-10);
+	_assert( (fabs(dx-(dx_pole)))<1e-10);
+	_assert( (fabs(dy-(dy_pole)))<1e-10);
+	_assert( (fabs(tai-(TAI_UTC)))<1e-10);
+
+
+    
+    return 0;
+}
+
+int I1_Legendre_01() {
+    
 	
-    _assert( (fabs(DPSI-(dpsi)))<1e-10);
-	_assert( (fabs(DEPS-(deps)))<1e-10);
+    
+    auto [pnm, dpnm] = Legendre(2,2,2.5);
+	Matrix &p=zeros(3);
+	p(1,1)=1;p(1,2)=0;p(1,3)=0;
+	p(2,1)=1.03658416050274;p(2,2)=-1.38762144628672;p(2,3)=0;
+	p(3,1)=0.0833010473685024;p(3,2)=-1.85694887302218;p(3,3)=1.24290056661382;
+	
+	Matrix &d=zeros(3);
+	d(1,1)=0;d(1,2)=0;d(1,3)=0;
+	d(2,1)=-1.38762144628672;d(2,2)=-1.03658416050274;d(2,3)=0;
+	d(3,1)=-3.21632979513219;d(3,2)=1.09861892024788;d(3,3)=1.85694887302218;
+	
+    cout<<"pnm: "<<"\n"<<pnm<<"\n";
+	cout<<"dpnm: "<<"\n"<<dpnm<<"\n";
+    _assert(m_equals(pnm,p, 1e-10));
+	_assert(m_equals(dpnm,d, 1e-10));
 
 
     
@@ -772,8 +827,9 @@ int all_tests()
 	_verify(I1_sign__01);
 	_verify(I1_timediff_01);
 	_verify(I1_AzElPa_01);
-	
+	_verify(I1_IERS_01);
 	_verify(I1_NutAngles_01);
+	_verify(I1_Legendre_01);
 
     return 0;
 }
@@ -781,6 +837,7 @@ int all_tests()
 
 int main()
 {
+	eop19620101(21413);
     int result = all_tests();
 
     if (result == 0)

@@ -1,5 +1,5 @@
-#ifndef _IERS_
-#define _IERS_
+#ifndef _Legendre_
+#define _Legendre_
 
 
 #include "..\include\matrix.hpp"
@@ -10,6 +10,6 @@
 
 using namespace std;
 
-tuple<double,double,double,double,double,double,double,double,double> IERS(double Mjd_UTC,char interp);
+tuple<Matrix&,Matrix&> Legendre(int n,int m,double fi);
 
 #endif
