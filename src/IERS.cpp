@@ -1,6 +1,6 @@
 #include "..\include\IERS.hpp"
 
-tuple<double,double,double,double,double,double,double,double,double> IERS(double Mjd_UTC,char interp='n'){
+tuple<double,double,double,double,double,double,double,double,double> IERS(double Mjd_UTC,char interp){
 	
 	double mjd, mfme, fixf, x_pole, y_pole, UT1_UTC, LOD, dpsi, deps, dx_pole, dy_pole, TAI_UTC;
 	int i;

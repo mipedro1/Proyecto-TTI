@@ -17,6 +17,8 @@
 #include "..\include\IERS.hpp"
 #include "../include/global.hpp"
 #include "..\include\Legendre.hpp"
+#include "..\include\TimeUpdate.hpp"
+#include "..\include\AccelHarmonic.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -777,12 +779,50 @@ int I1_Legendre_01() {
 	d(2,1)=-1.38762144628672;d(2,2)=-1.03658416050274;d(2,3)=0;
 	d(3,1)=-3.21632979513219;d(3,2)=1.09861892024788;d(3,3)=1.85694887302218;
 	
-    cout<<"pnm: "<<"\n"<<pnm<<"\n";
-	cout<<"dpnm: "<<"\n"<<dpnm<<"\n";
     _assert(m_equals(pnm,p, 1e-10));
 	_assert(m_equals(dpnm,d, 1e-10));
 
 
+    
+    return 0;
+}
+
+int I1_TimeUpdate_01() {
+    
+	
+    Matrix P(2, 2);
+	P(1,1) =1; P(1,2) =2; P(2,1)=3;P(2,2)=4;
+	
+	Matrix Phi(2, 2);
+	Phi(1,1) =1; Phi(1,2) =1; Phi(2,1)=1;Phi(2,2)=1;
+	 
+	
+	Matrix R(2,2);
+	R(1,1) =10; R(1,2) =10; R(2,1)=10;R(2,2)=10;
+	
+	TimeUpdate(P,Phi);
+	
+    _assert(m_equals(P,R, 1e-10));
+    
+    return 0;
+}
+
+int I1_AccelHarmonic_01() {
+    
+	
+    Matrix P=zeros(3);
+	P(1,1) =7000e3; P(1,2) =0; P(1,3)=0;
+	
+	Matrix E=eye(3);
+	
+	 
+	
+	Matrix R=zeros(3);
+	R(1,1) =-8.14576607065686; R(1,2) =-3.66267894892037e-05; R(1,3)=-5.84508413583961e-09;
+	
+	Matrix a=AccelHarmonic(P,E,2,2);
+	
+    _assert(m_equals(a,R, 1e-10));
     
     return 0;
 }
@@ -830,6 +870,8 @@ int all_tests()
 	_verify(I1_IERS_01);
 	_verify(I1_NutAngles_01);
 	_verify(I1_Legendre_01);
+	_verify(I1_TimeUpdate_01);
+	_verify(I1_AccelHarmonic_01);
 
     return 0;
 }

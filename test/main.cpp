@@ -5,6 +5,11 @@
 int main(){
 	eop19620101(4); // c=21413
 	cout<< "eopdata\n"<<eopdata<<"\n";
+	
+	GGM03S(3); // n=181
+	cout<< "Cnm\n"<<Cnm<<"\n";
+	cout<< "Snm\n"<<Snm<<"\n";
+	
 	Matrix aux= R_x(3);
 	cout << "aux\n" << aux << "\n";
 	
