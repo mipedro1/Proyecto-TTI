@@ -8,9 +8,10 @@
 
 	// Body-fixed position
 	r.transpose();
-	
+	cout<<"E\n"<<E<<endl;
+	cout<<"r\n"<<r<<endl;
 	Matrix r_bf = E * r;
-	
+	cout<<"r_bf\n"<<r_bf<<endl;
 	// Auxiliary quantities
 	d = norm(r_bf);                     // distance
 	latgc = asin(r_bf(3)/d);
@@ -18,7 +19,6 @@
 
 	
 	auto [pnm, dpnm] = Legendre(n_max,m_max,latgc);
-	cout<<"AaaaaAAAaaaa\n"<<endl;
 	
 	dUdr = 0;
 	dUdlatgc = 0;
@@ -31,10 +31,6 @@
 		b2 =  (gm/d)*pow((r_ref/d),n);
 		b3 =  (gm/d)*pow((r_ref/d),n);
 		for (int m=0;m<m_max;m++){
-			cout<<"Cnm:\n"<<Cnm<<endl;
-			cout<<"pnm:\n"<<pnm<<endl;
-			cout<<"dpnm:\n"<<dpnm<<endl;
-			cout<<"Snm:\n"<<Snm<<endl;
 			q1 = q1 + pnm(n+1,m+1)*(Cnm(n+1,m+1)*cos(m*lon)+Snm(n+1,m+1)*sin(m*lon));
 			q2 = q2 + dpnm(n+1,m+1)*(Cnm(n+1,m+1)*cos(m*lon)+Snm(n+1,m+1)*sin(m*lon));
 			q3 = q3 + m*pnm(n+1,m+1)*(Snm(n+1,m+1)*cos(m*lon)-Cnm(n+1,m+1)*sin(m*lon));
@@ -52,13 +48,16 @@
 	ax = (1/d*dUdr-r_bf(3)/(pow(d,2)*sqrt(r2xy))*dUdlatgc)*r_bf(1)-(1/r2xy*dUdlon)*r_bf(2);
 	ay = (1/d*dUdr-r_bf(3)/(pow(d,2)*sqrt(r2xy))*dUdlatgc)*r_bf(2)+(1/r2xy*dUdlon)*r_bf(1);
 	az =  1/d*dUdr*r_bf(3)+sqrt(r2xy)/pow(d,2)*dUdlatgc;
-
+	
+	
+	cout<<"ax\n"<<ax<<endl;
+	cout<<"ay\n"<<ay<<endl;
+	cout<<"az\n"<<az<<endl;
 	
 	Matrix a_bf(3,1);
 	a_bf(1)=ax; a_bf(2)=ay; a_bf(3)=az;
-	a_bf.transpose();
 	// Inertial acceleration 
+	cout<<"E*a_bf\n"<<E*a_bf<<endl;
 	Matrix& a = E*a_bf;
-	
 	return a;
  }

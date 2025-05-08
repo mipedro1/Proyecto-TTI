@@ -19,6 +19,11 @@
 #include "..\include\Legendre.hpp"
 #include "..\include\TimeUpdate.hpp"
 #include "..\include\AccelHarmonic.hpp"
+#include "..\include\gmst.hpp"
+#include "..\include\PrecMatrix.hpp"
+#include "..\include\PoleMatrix.hpp"
+#include "..\include\NutMatrix.hpp"
+#include "..\include\LTC.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -810,19 +815,87 @@ int I1_TimeUpdate_01() {
 int I1_AccelHarmonic_01() {
     
 	
-    Matrix P=zeros(3);
+    Matrix P(1,3);
 	P(1,1) =7000e3; P(1,2) =0; P(1,3)=0;
 	
 	Matrix E=eye(3);
 	
 	 
 	
-	Matrix R=zeros(3);
+	Matrix R(1,3);
 	R(1,1) =-8.14576607065686; R(1,2) =-3.66267894892037e-05; R(1,3)=-5.84508413583961e-09;
 	
 	Matrix a=AccelHarmonic(P,E,2,2);
 	
     _assert(m_equals(a,R, 1e-10));
+    
+    return 0;
+}
+int I1_Gmst_01() {
+    
+	
+	double resultado=1.45762881716801;
+	
+    _assert( (fabs(gmst(60110.5)-(resultado)))<1e-10);
+    
+    return 0;
+}
+
+int I1_PrecMatrix_01() {
+    
+	
+    Matrix P(3,3);
+	P(1,1) =0.999988458573035; P(1,2) =-0.0044064693314773; P(1,3)=-0.00191461451888747;
+	P(2,1) =0.00440646933120376; P(2,2) =0.999990291457991; P(2,3)=-4.21851229096372e-06;
+	P(3,1) =0.00191461451951702; P(3,2) =-4.21822655524287e-06; P(3,3)=0.999998167115044;
+	
+	Matrix R=PrecMatrix(51544.0,58741.0);
+	
+    _assert(m_equals(P,R, 1e-10));
+    
+    return 0;
+}
+int I1_PoleMatrix_01() {
+    
+	
+    Matrix P(3,3);
+	P(1,1) =0.999998000000667; P(1,2) =1.99999833333384e-06; P(1,3)=0.00199999766666768;
+	P(2,1) =0; P(2,2) =0.999999500000042; P(2,3)=-0.000999999833333342;
+	P(3,1) =-0.00199999866666693; P(3,2) =0.000999997833334342; P(3,3)=0.999997500001708;
+	
+	Matrix R=PoleMatrix(0.002,0.001);
+	
+    _assert(m_equals(P,R, 1e-10));
+    
+    return 0;
+}
+
+int I1_NutMatrix_01() {
+    
+	
+    Matrix P(3,3);
+	P(1,1) =0.999999997583483; P(1,2) =6.37847604742929e-05; P(1,3)=2.76502946008031e-05;
+	P(2,1) =-6.37842142060874e-05; P(2,2) =0.999999997770622; P(2,3)=-1.97567566176948e-05;
+	P(3,1) =-2.76515547191487e-05; P(3,2) =1.97549929176755e-05; P(3,3)=0.999999999422566;
+	
+	Matrix R=NutMatrix(59580.0);
+	
+    _assert(m_equals(P,R, 1e-10));
+    
+    return 0;
+}
+
+int I1_LTC_01() {
+    
+	
+    Matrix P(3,3);
+	P(1,1) =0.961277227548362; P(1,2) =0.275583184895113; P(1,3)=0;
+	P(2,1) =-0.179676221403558; P(2,2) =0.626738746897472; P(2,3)=0.758231494069936;
+	P(3,1) =0.208955850023573; P(3,2) =-0.7288706684594; P(3,3)=0.651985430359048;
+	
+	Matrix R=LTC(-1.2916,0.7102);
+	
+    _assert(m_equals(P,R, 1e-10));
     
     return 0;
 }
@@ -871,7 +944,12 @@ int all_tests()
 	_verify(I1_NutAngles_01);
 	_verify(I1_Legendre_01);
 	_verify(I1_TimeUpdate_01);
-	_verify(I1_AccelHarmonic_01);
+	_verify(I1_Gmst_01);
+	_verify(I1_PrecMatrix_01);
+	//_verify(I1_AccelHarmonic_01);
+	_verify(I1_PoleMatrix_01);
+	_verify(I1_NutMatrix_01);
+	_verify(I1_LTC_01);
 
     return 0;
 }
@@ -880,6 +958,7 @@ int all_tests()
 int main()
 {
 	eop19620101(21413);
+	GGM03S(181);
     int result = all_tests();
 
     if (result == 0)
