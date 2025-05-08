@@ -24,6 +24,8 @@
 #include "..\include\PoleMatrix.hpp"
 #include "..\include\NutMatrix.hpp"
 #include "..\include\LTC.hpp"
+#include "..\include\EqnEquinox.hpp"
+#include "..\include\gast.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -337,10 +339,8 @@ int m_zeros_02() {
 	
 	Matrix A=zeros(3);
 	
-	Matrix B(3,3);
+	Matrix B(1,3);
 	B(1,1) = 0; B(1,2) = 0; B(1,3)=0;
-	B(2,1) = 0; B(2,2) = 0; B(2,3)=0;
-	B(3,1) = 0; B(3,2) = 0; B(3,3)=0;
     
     _assert(m_equals(A, B, 1e-10));
     
@@ -899,6 +899,24 @@ int I1_LTC_01() {
     
     return 0;
 }
+int I1_EqnEquinox_01() {
+    
+	
+	double resultado=-6.19313954901517e-05;
+	
+    _assert( (fabs(EqnEquinox(51544.0)-(resultado)))<1e-10);
+    
+    return 0;
+}
+int I1_Gast_01() {
+    
+	
+	double resultado=1.74470523193512;
+	
+    _assert( (fabs(gast(51544.0)-(resultado)))<1e-10);
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -950,6 +968,9 @@ int all_tests()
 	_verify(I1_PoleMatrix_01);
 	_verify(I1_NutMatrix_01);
 	_verify(I1_LTC_01);
+	_verify(I1_EqnEquinox_01);
+	_verify(I1_Gast_01);
+	
 
     return 0;
 }
@@ -959,6 +980,7 @@ int main()
 {
 	eop19620101(21413);
 	GGM03S(181);
+	DE430Coeff(2285,1020); 
     int result = all_tests();
 
     if (result == 0)

@@ -3,6 +3,7 @@
  Matrix eopdata;
  Matrix Cnm;
  Matrix Snm;
+ Matrix PC;
 
 void eop19620101(int c){
 	eopdata=zeros(13,c);
@@ -47,3 +48,22 @@ void GGM03S(int n){
 	
 	fclose(fid);
 }
+void DE430Coeff(int f, int c){
+	PC=zeros(f,c);
+	
+	FILE *fid = fopen("../data/DE430Coeff.txt","r");
+	
+	if(fid==NULL){
+		printf("Fail open DE430Coeff.txt file\n");
+		exit(EXIT_FAILURE);
+	}
+	
+	for (int i=1;i<=f;i++){
+		for (int j=1;j<=c;j++){
+			fscanf(fid,"%lf",&(PC(i,j)));
+		}
+	}
+	fclose(fid);
+}
+
+

@@ -10,6 +10,9 @@ int main(){
 	cout<< "Cnm\n"<<Cnm<<"\n";
 	cout<< "Snm\n"<<Snm<<"\n";
 	
+	DE430Coeff(10,5); // f=2285 c=1020
+	cout<< "PC\n"<<PC<<"\n";
+	
 	Matrix aux= R_x(3);
 	cout << "aux\n" << aux << "\n";
 	

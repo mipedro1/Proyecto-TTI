@@ -397,15 +397,14 @@ Matrix& zeros(int n) {
         cout << "Error in zeros: n must be positive\n";
         exit(EXIT_FAILURE);
     }
-    Matrix *m_aux = new Matrix(n, n);
-	
-	for(int i = 1; i <= n; i++) {
-		for(int j = 1; j <= n; j++) {
-			(*m_aux)(i,j) = 0;
-		}
-	}
-	
-	return (*m_aux);
+    Matrix *m_aux = new Matrix(1, n);  
+    
+    
+    for(int j = 1; j <= n; j++) {
+        (*m_aux)(1, j) = 0; 
+    }
+    
+    return (*m_aux);
 }
 
 double norm(Matrix& m) {
