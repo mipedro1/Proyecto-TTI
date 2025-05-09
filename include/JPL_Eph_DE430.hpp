@@ -1,5 +1,5 @@
-#ifndef _Legendre_
-#define _Legendre_
+#ifndef _JplEp_
+#define _JplEp_
 
 
 #include "..\include\matrix.hpp"

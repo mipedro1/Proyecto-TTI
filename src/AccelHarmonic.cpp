@@ -7,10 +7,10 @@
 	const double gm    = 398600.4415e9; // [m^3/s^2]; GGM03S
 
 	// Body-fixed position
-	r.transpose();
+	
 	cout<<"E\n"<<E<<endl;
 	cout<<"r\n"<<r<<endl;
-	Matrix r_bf = E * r;
+	Matrix r_bf = E * r.transpose();
 	cout<<"r_bf\n"<<r_bf<<endl;
 	// Auxiliary quantities
 	d = norm(r_bf);                     // distance
@@ -19,13 +19,14 @@
 
 	
 	auto [pnm, dpnm] = Legendre(n_max,m_max,latgc);
-	
+	cout<<"pnm\n"<<pnm<<endl;
+	cout<<"dpnm\n"<<dpnm<<endl;
 	dUdr = 0;
 	dUdlatgc = 0;
 	dUdlon = 0;
 	q3 = 0; q2 = q3; q1 = q2;
-	int n=0;
-	int m=0;
+	int n;
+	int m;
 	for (n=0;n<n_max;n++){
 		b1 = (-gm/pow(d,2))*pow((r_ref/d),n)*(n+1);
 		b2 =  (gm/d)*pow((r_ref/d),n);
@@ -57,6 +58,7 @@
 	Matrix a_bf(3,1);
 	a_bf(1)=ax; a_bf(2)=ay; a_bf(3)=az;
 	// Inertial acceleration 
+	cout<<"E\n"<<E<<endl;
 	cout<<"E*a_bf\n"<<E*a_bf<<endl;
 	Matrix& a = E*a_bf;
 	return a;

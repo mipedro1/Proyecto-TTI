@@ -35,7 +35,7 @@ public:
 	
 	Matrix& inv();
 	double det() const;
-	void transpose();
+	Matrix& transpose();
 	
 	double dot(Matrix& m);
 	Matrix& cross(Matrix& m);

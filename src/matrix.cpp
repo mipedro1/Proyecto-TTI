@@ -375,7 +375,7 @@ Matrix& eye(int n) {
 	return (*m_aux);
 }
 
-void Matrix::transpose() {
+Matrix& Matrix::transpose() {
     Matrix* m_aux = new Matrix(this->n_column, this->n_row);
 
     
@@ -386,10 +386,9 @@ void Matrix::transpose() {
     }
 
     
-    *this = *m_aux;
 
     
-    delete m_aux;
+    return (*m_aux);
 }
 
 Matrix& zeros(int n) {

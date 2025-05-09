@@ -26,6 +26,7 @@
 #include "..\include\LTC.hpp"
 #include "..\include\EqnEquinox.hpp"
 #include "..\include\gast.hpp"
+#include "..\include\JPL_Eph_DE430.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -324,12 +325,12 @@ int m_trans_01() {
 	A(1,1) = 1; A(1,2) = 2;
 	A(2,1) = 3; A(2,2) = 4;
 	
-	A.transpose();
+	
 	Matrix B(f,c);
 	B(1,1) = 1; B(1,2) = 3;
 	B(2,1) = 2; B(2,2) = 4;
     
-    _assert(m_equals(A, B, 1e-10));
+    _assert(m_equals(A.transpose(), B, 1e-10));
     
     return 0;
 }
@@ -774,12 +775,12 @@ int I1_Legendre_01() {
 	
     
     auto [pnm, dpnm] = Legendre(2,2,2.5);
-	Matrix &p=zeros(3);
+	Matrix &p=zeros(3,3);
 	p(1,1)=1;p(1,2)=0;p(1,3)=0;
 	p(2,1)=1.03658416050274;p(2,2)=-1.38762144628672;p(2,3)=0;
 	p(3,1)=0.0833010473685024;p(3,2)=-1.85694887302218;p(3,3)=1.24290056661382;
 	
-	Matrix &d=zeros(3);
+	Matrix &d=zeros(3,3);
 	d(1,1)=0;d(1,2)=0;d(1,3)=0;
 	d(2,1)=-1.38762144628672;d(2,2)=-1.03658416050274;d(2,3)=0;
 	d(3,1)=-3.21632979513219;d(3,2)=1.09861892024788;d(3,3)=1.85694887302218;
@@ -795,14 +796,14 @@ int I1_Legendre_01() {
 int I1_TimeUpdate_01() {
     
 	
-    Matrix P(2, 2);
+    Matrix &P = zeros(2, 2);
 	P(1,1) =1; P(1,2) =2; P(2,1)=3;P(2,2)=4;
 	
-	Matrix Phi(2, 2);
+	Matrix &Phi = zeros(2, 2);
 	Phi(1,1) =1; Phi(1,2) =1; Phi(2,1)=1;Phi(2,2)=1;
 	 
 	
-	Matrix R(2,2);
+	Matrix &R = zeros(2,2);
 	R(1,1) =10; R(1,2) =10; R(2,1)=10;R(2,2)=10;
 	
 	TimeUpdate(P,Phi);
@@ -917,6 +918,82 @@ int I1_Gast_01() {
     
     return 0;
 }
+int I1_Jpl_Ep_01() {
+    
+	
+    
+    auto [r_Mercury,r_Venus,r_Earth,r_Mars,r_Jupiter,r_Saturn,r_Uranus,r_Neptune,r_Pluto,r_Moon,r_Sun] = JPL_Eph_DE430(59580.0);
+	Matrix r_m(3,1);
+	r_m(1,1)=79837647856.2735;
+	r_m(2,1)=-136261500272.064;
+	r_m(3,1)=-64981938909.0024;
+	
+	Matrix r_v(3,1);
+	r_v(1,1)=15975346745.7943;
+	r_v(2,1)=-35365322602.8999;
+	r_v(3,1)=-13084365467.2929;
+	
+	Matrix r_e(3,1);
+	r_e(1,1)=-27411369555.7101;
+	r_e(2,1)=133274848816.261;
+	r_e(3,1)=57802495046.4152;
+	
+	Matrix r_mar(3,1);
+	r_mar(1,1)=-103539704034.338;
+	r_mar(2,1)=-306659028736.292;
+	r_mar(3,1)=-133814565360.54;
+	
+	Matrix r_j(3,1);
+	r_j(1,1)=722966922027.3;
+	r_j(2,1)=-373377540853.151;
+	r_j(3,1)=-177648967214.498;
+	
+	Matrix r_s(3,1);
+	r_s(1,1)=1067340429956.83;
+	r_s(2,1)=-1093570901121.93;
+	r_s(3,1)=-499244305007.512;
+	
+	Matrix r_u(3,1);
+	r_u(1,1)=2179981852798.6;
+	r_u(2,1)=1725296913450.38;
+	r_u(3,1)=725756527252.905;
+	
+	Matrix r_nep(3,1);
+	r_nep(1,1)=4459200999344.89;
+	r_nep(2,1)=-658649518957.463;
+	r_nep(3,1)=-383177121895.469;
+	
+	Matrix r_p(3,1);
+	r_p(1,1)=2289056144424.15;
+	r_p(2,1)=-4312612949408.77;
+	r_p(3,1)=-2043473055509.64;
+	
+	Matrix r_moo(3,1);
+	r_moo(1,1)=-91868548.3240412;
+	r_moo(2,1)=-315040557.002235;
+	r_moo(3,1)=-145304426.66531;
+	
+	Matrix r_su(3,1);
+	r_su(1,1)=26127801143.8142;
+	r_su(2,1)=-132825709286.88;
+	r_su(3,1)=-57579560410.2985;
+	
+    _assert(m_equals(r_Mercury,r_m, 1e-2));
+	_assert(m_equals(r_Venus,r_v, 1e-2));
+	_assert(m_equals(r_Earth,r_e, 1e-2));
+	_assert(m_equals(r_Mars,r_mar, 1e-2));
+	_assert(m_equals(r_Jupiter,r_j, 1e-2));
+	_assert(m_equals(r_Saturn,r_s, 1e-2));
+	_assert(m_equals(r_Uranus,r_u, 1e-2));
+	_assert(m_equals(r_Neptune,r_nep, 1e-2));
+	_assert(m_equals(r_Pluto,r_p, 1e-2));
+	_assert(m_equals(r_Moon,r_moo, 1e-2));
+	_assert(m_equals(r_Sun,r_su, 1e-2));
+
+
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -964,12 +1041,13 @@ int all_tests()
 	_verify(I1_TimeUpdate_01);
 	_verify(I1_Gmst_01);
 	_verify(I1_PrecMatrix_01);
-	//_verify(I1_AccelHarmonic_01);
+	_verify(I1_AccelHarmonic_01);
 	_verify(I1_PoleMatrix_01);
 	_verify(I1_NutMatrix_01);
 	_verify(I1_LTC_01);
 	_verify(I1_EqnEquinox_01);
 	_verify(I1_Gast_01);
+	_verify(I1_Jpl_Ep_01);
 	
 
     return 0;
