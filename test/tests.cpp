@@ -27,6 +27,8 @@
 #include "..\include\EqnEquinox.hpp"
 #include "..\include\gast.hpp"
 #include "..\include\JPL_Eph_DE430.hpp"
+#include "..\include\MeasUpdate.hpp"
+#include "..\include\G_AccelHarmonic.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -816,15 +818,15 @@ int I1_TimeUpdate_01() {
 int I1_AccelHarmonic_01() {
     
 	
-    Matrix P(1,3);
-	P(1,1) =7000e3; P(1,2) =0; P(1,3)=0;
+    Matrix P(3,1);
+	P(1,1) =7000e3; P(2,1) =0; P(3,1)=0;
 	
 	Matrix E=eye(3);
 	
 	 
 	
-	Matrix R(1,3);
-	R(1,1) =-8.14576607065686; R(1,2) =-3.66267894892037e-05; R(1,3)=-5.84508413583961e-09;
+	Matrix R(3,1);
+	R(1,1) =-8.14576607065686; R(2,1) =-3.66267894892037e-05; R(3,1)=-5.84508413583961e-09;
 	
 	Matrix a=AccelHarmonic(P,E,2,2);
 	
@@ -994,6 +996,58 @@ int I1_Jpl_Ep_01() {
     
     return 0;
 }
+int I1_MeasUpdate_01() {
+    
+	Matrix &x=zeros(2,2);
+	x(1,1)=1;x(1,2)=2;
+	x(2,1)=1;x(2,2)=2;
+    Matrix &G=eye(2);
+	Matrix &P=zeros(2,2);
+	P(1,1)=0.5; P(1,2)=0;
+	P(2,1)=0; P(2,2)=0.5;
+	
+    auto [K, xx, pp] = MeasUpdate(x,3,2.5,0.2,G,P,2);
+	Matrix &kk=zeros(2,2);
+	kk(1,1)=0.931034482758621;kk(1,2)=-0.0689655172413793;
+	kk(2,1)=-0.0689655172413793;kk(2,2)=0.931034482758621;
+	
+	Matrix &x_result=zeros(2,2);
+	x_result(1,1)=1.46551724137931;x_result(1,2)=1.96551724137931;
+	x_result(2,1)=0.96551724137931;x_result(2,2)=2.46551724137931;
+	
+	Matrix &p_result=zeros(2,2);
+	p_result(1,1)=0.0344827586206897;p_result(1,2)=0.0344827586206897;
+	p_result(2,1)=0.0344827586206897;p_result(2,2)=0.0344827586206897;
+	
+    _assert(m_equals(K,kk, 1e-10));
+	_assert(m_equals(x_result,xx, 1e-10));
+	_assert(m_equals(p_result,pp, 1e-10));
+
+
+    
+    return 0;
+}
+int I1_G_Accel_01() {
+    
+	Matrix &x=zeros(3,3);
+	x(1,1)=-157338.097201467;x(1,2)=-223651.44684124;x(1,3)=110180.703780591;
+	x(2,1)=-223651.4468503;x(2,2)=-154610.728589177 ;x(2,3)=112129.517939985;
+	x(3,1)=110180.702375412;x(3,2)=112129.516544819;x(3,3)=311948.825689197;
+	
+	
+	Matrix P(3,1);
+	P(1,1) =7000e3; P(2,1) =0; P(3,1)=0;
+	
+	Matrix &E=eye(3);
+	
+	
+	
+    _assert(m_equals(G_AccelHarmonic(P,E,2,2),x, 1e-10));
+
+
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -1048,6 +1102,8 @@ int all_tests()
 	_verify(I1_EqnEquinox_01);
 	_verify(I1_Gast_01);
 	_verify(I1_Jpl_Ep_01);
+	_verify(I1_MeasUpdate_01);
+	_verify(I1_G_Accel_01);
 	
 
     return 0;
