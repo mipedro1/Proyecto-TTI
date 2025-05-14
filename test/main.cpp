@@ -13,6 +13,14 @@ int main(){
 	DE430Coeff(10,5); // f=2285 c=1020
 	cout<< "PC\n"<<PC<<"\n";
 	
+	AuxParam.Mjd_UTC=49746.1112847221;
+	AuxParam.Mjd_TT=49746.1170623147;
+	AuxParam.n      = 20;
+	AuxParam.m      = 20;
+	AuxParam.sun     = 1;
+	AuxParam.moon    = 1;
+	AuxParam.planets = 1;
+	
 	Matrix aux= R_x(3);
 	cout << "aux\n" << aux << "\n";
 	

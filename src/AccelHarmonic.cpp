@@ -21,10 +21,10 @@
 	auto [pnm, dpnm] = Legendre(n_max,m_max,latgc);
 	
 	
-	dUdr = 0;
-	dUdlatgc = 0;
-	dUdlon = 0;
-	q3 = 0; q2 = q3; q1 = q2;
+	dUdr = 0.0;
+	dUdlatgc = 0.0;
+	dUdlon = 0.0;
+	q3 = 0.0; q2 = q3; q1 = q2;
 	int n;
 	int m;
 	for (n=0;n<=n_max;n++){
@@ -46,15 +46,15 @@
 	// Body-fixed acceleration
 	r2xy = pow(r_bf(1),2)+pow(r_bf(2),2);
 
-	ax = (1/d*dUdr-r_bf(3)/(pow(d,2)*sqrt(r2xy))*dUdlatgc)*r_bf(1)-(1/r2xy*dUdlon)*r_bf(2);
-	ay = (1/d*dUdr-r_bf(3)/(pow(d,2)*sqrt(r2xy))*dUdlatgc)*r_bf(2)+(1/r2xy*dUdlon)*r_bf(1);
-	az =  1/d*dUdr*r_bf(3)+sqrt(r2xy)/pow(d,2)*dUdlatgc;
+	ax = (1.0/d*dUdr-r_bf(3)/(pow(d,2)*sqrt(r2xy))*dUdlatgc)*r_bf(1)-(1.0/r2xy*dUdlon)*r_bf(2);
+	ay = (1.0/d*dUdr-r_bf(3)/(pow(d,2)*sqrt(r2xy))*dUdlatgc)*r_bf(2)+(1.0/r2xy*dUdlon)*r_bf(1);
+	az =  1.0/d*dUdr*r_bf(3)+sqrt(r2xy)/pow(d,2)*dUdlatgc;
 	
 	
 	
 	Matrix a_bf(3,1);
 	a_bf(1)=ax; a_bf(2)=ay; a_bf(3)=az;
 	// Inertial acceleration 
-	Matrix& a = E*a_bf;
+	Matrix& a = E.transpose()*a_bf;
 	return a;
  }

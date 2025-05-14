@@ -6,7 +6,7 @@
 // Mathematical constants
 static constexpr double M_PI = 3.14159265358979323846;  // Pi
 
-static constexpr double pi2  = 2 * M_PI;                // 2pi
+static constexpr double pi2  = 2.0 * M_PI;                // 2pi
 static constexpr double Rad  = M_PI / 180.0;            // Radians per degree
 static constexpr double Deg  = 180.0 / M_PI;            // Degrees per radian
 static constexpr double Arcs = 3600.0 * 180.0 / M_PI;   // Arcseconds per radian
@@ -19,7 +19,7 @@ static constexpr double AU        = 149597870700.0;     // Astronomical unit [m]
 
 // Physical parameters of the Earth, Sun and Moon
 static constexpr double R_Earth = 6378.1363e3;  // Earth's radius [m]
-static constexpr double f_Earth = 1 / 298.257223563;  // Flattening
+static constexpr double f_Earth = 1.0 / 298.257223563;  // Flattening
 
 // Earth rotation (derivative of GMST at J2000; differs from inertial period by precession)
 static constexpr double omega_Earth = 15.04106717866910 / 3600.0 * Rad;  // [rad/s]; WGS-84
@@ -38,6 +38,6 @@ static constexpr double GM_Neptune = 6836527.100580e9;  // [m^3/s^2]; DE430
 static constexpr double GM_Pluto   = 977.0000000000009e9;  // [m^3/s^2]; DE430
 
 // Solar radiation pressure at 1 AU
-static constexpr double P_Sol      = 1367 / c_light;  // [N/m^2] (~1367 W/m^2); IERS 96
+static constexpr double P_Sol      = 1367.0 / c_light;  // [N/m^2] (~1367 W/m^2); IERS 96
 
 #endif 

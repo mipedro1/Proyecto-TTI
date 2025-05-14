@@ -1,10 +1,10 @@
 #include "..\include\NutAngles.hpp"
 
 tuple<double,double> NutAngles (double Mjd_TT){
-	double T  = (Mjd_TT-MJD_J2000)/36525;
+	double T  = (Mjd_TT-MJD_J2000)/36525.0;
 	double T2 = T*T;
 	double T3 = T2*T;
-	double rev = 360*3600; // arcsec/revolution
+	double rev = 360.0*3600.0; // arcsec/revolution
 
 	int N_coeff = 106;
 	
@@ -139,8 +139,8 @@ tuple<double,double> NutAngles (double Mjd_TT){
 
 	// Nutation in longitude and obliquity [rad]
 	double dpsi,deps,arg;
-	dpsi = 0;
-	deps = 0;
+	dpsi = 0.0;
+	deps = 0.0;
 
 	for (int i = 0; i < N_coeff; ++i) {
 	  arg  =  ( C[i][0]*l+C[i][1]*lp+C[i][2]*F+C[i][3]*D+C[i][4]*Om )/Arcs;
