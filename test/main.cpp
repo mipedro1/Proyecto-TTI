@@ -3,6 +3,7 @@
 #include "../include/global.hpp"
 
 int main(){
+	//Acordarme de definir los atributos de AuxParam
 	eop19620101(4); // c=21413
 	cout<< "eopdata\n"<<eopdata<<"\n";
 	

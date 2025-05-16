@@ -10,23 +10,18 @@ Matrix& VarEqn(double x,Matrix& yPhi){
 	Matrix& N = NutMatrix(AuxParam.Mjd_TT + x/86400.0);
 	Matrix& T = N * P;
 	Matrix& E = PoleMatrix(x_pole,y_pole) * GHAMatrix(Mjd_UT1) * T;
-	
-	cout<<"yPhi\n"<<yPhi<<endl;
 	// State vector components
 	Matrix& r = yPhi.transpose().extract_vector(1, 3);
-	cout<<"yPhi\n"<<yPhi.transpose()<<endl;
-	cout<<"r\n"<<r<<endl;
 	Matrix& v = yPhi.transpose().extract_vector(4, 6);
 	Matrix& Phi = zeros(6,6);
-
 	// State transition matrix
 	for (int j=1;j<=6;j++){
-		Phi.assign_column(j,yPhi.transpose().extract_vector(6*j+1,6*j+6));
+		Phi.assign_column(j,yPhi.transpose().extract_vector(6*j+1,6*j+6).transpose());
 	}
 	
 	// Acceleration and gradient
-	Matrix& a = AccelHarmonic ( r, E, AuxParam.n, AuxParam.m );
-	Matrix& G = G_AccelHarmonic ( r, E, AuxParam.n, AuxParam.m );
+	Matrix& a = AccelHarmonic ( r.transpose(), E, AuxParam.n, AuxParam.m );
+	Matrix& G = G_AccelHarmonic ( r.transpose(), E, AuxParam.n, AuxParam.m );
 
 	// Time derivative of state transition matrix
 	Matrix& yPhip = zeros(42,1);
