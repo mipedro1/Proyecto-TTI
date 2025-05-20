@@ -32,6 +32,7 @@
 #include "..\include\GHAMatrix.hpp"
 #include "..\include\Accel.hpp"
 #include "..\include\VarEqn.hpp"
+#include "..\include\DEInteg.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -1140,6 +1141,35 @@ int I1_VarEqn_01() {
     
     return 0;
 }
+int I1_DeInteg_01() {
+    
+	
+	Matrix &x=zeros(6,1);
+	x(1,1)=5542555.89427451;
+	x(2,1)=3213514.83814162;
+	x(3,1)=3990892.92789074;
+	x(4,1)=5394.06894044389;
+	x(5,1)=-2365.21290574021;
+	x(6,1)=-7061.8448137347;
+	
+	Matrix &Y0_apr=zeros(6,1);
+	Y0_apr(1,1)=6221397.62857869;
+	Y0_apr(2,1)=2867713.77965738;
+	Y0_apr(3,1)=3006155.98509949;
+	Y0_apr(4,1)=4645.04725161806;
+	Y0_apr(5,1)=-2752.21591588204;
+	Y0_apr(6,1)=-7507.99940987031;
+	
+	double t_aux=0.0;
+	double obs=-134.999991953373;
+	Y0_apr=DEInteg(Accel,t_aux,obs,1e-13,1e-6,6,Y0_apr);
+	cout<<"Y0_apr\n"<<Y0_apr<<endl;
+    _assert(m_equals(Y0_apr,x, 1e-10));
+
+
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -1199,6 +1229,7 @@ int all_tests()
 	_verify(I1_GHAMatrix_01);
 	_verify(I1_Accel_01);
 	_verify(I1_VarEqn_01);
+	_verify(I1_DeInteg_01);
 	
 	
 

@@ -3,17 +3,19 @@
 
  Matrix& DEInteg(Matrix& f (double t,Matrix& y),double t,double tout,double relerr,double abserr,int n_eqn,Matrix& y){
 	// maxnum = 500;
+	Matrix& error_matrix=zeros(6,1);
+	double eps=2.22044604925031e-16;
 	double twou  = 2*eps;
 	double fouru = 4*eps;
 
-	struct( 
+	struct{ 
 		int DE_INIT= 1;      // Restart integration
 		int DE_DONE= 2;      // Successful step
 		int DE_BADACC= 3;    // Accuracy requirement could not be achieved
 		int DE_NUMSTEPS= 4;  // Permitted number of steps exceeded
 		int DE_STIFF= 5;     // Stiff problem suspected
 		int DE_INVPARAM= 6;  // Invalid input parameters
-		)DE_STATE;
+	}DE_STATE;
 
 	int State_ = DE_STATE.DE_INIT;
 	bool PermitTOUT = true;         // Allow integration past tout by default
@@ -59,9 +61,8 @@
 	Matrix& p     = zeros(n_eqn,1);
 	Matrix& yp    = zeros(n_eqn,1);
 	Matrix& phi   = zeros(n_eqn,17);
-	Matrix& g     = zeros(14,1);
 	Matrix& sig   = zeros(14,1);
-	Matrix& rho   = zeros(14,1);
+	Matrix rho   = zeros(14,1);
 	Matrix& w     = zeros(13,1);
 	Matrix& alpha = zeros(13,1);
 	Matrix& beta  = zeros(13,1);
@@ -73,7 +74,7 @@
 	// Return, if output time equals input time
 
 	if (t==tout)    // No integration
-		return;
+		return error_matrix;
 	
 
 	// Test for improper parameters
@@ -87,7 +88,7 @@
 		 ( (State_ != DE_STATE.DE_INIT) &&       
 		 (t != told)           ) ){
 		 State_ = DE_STATE.DE_INVPARAM;              // Set error code
-		 return;                                     // Exit
+		 return error_matrix;                                     // Exit
 	}
 
 	// On each call set interval of integration and counter for
@@ -108,9 +109,8 @@
 	double releps = relerr/epsilon;
 	double abseps = abserr/epsilon;
 	bool OldPermit=false;
-	bool crash,start,phase1,nornd;
-	double x,h,p5eps,round;
-	Matrix& yy;
+	bool crash,start,phase1,nornd,success;
+	double x,h,hnew,p5eps,round,xold,delsgn;
 	
 	if  ( (State_==DE_STATE.DE_INIT) || (!OldPermit) || (delsgn*del<=0.0) ){
 		// On start and restart also set the work variables x and yy(*),
@@ -122,15 +122,15 @@
 		h      = sign_( max(fouru*fabs(x), fabs(tout-x)), tout-x );
 	}
 	
-	Matrix& yout;
-	Matrix& ypout;
-	double hi,term,gamma,eta,psijm1,sum,absh,temp2;
-	int temp1,ki,kold,i_,ifail,hold,hnew,kp1,kp2,km1,km2,ns,nsp1,realns,im1,reali;
+	Matrix& yout=zeros(n_eqn,1);
+	Matrix& ypout=zeros(n_eqn,1);
+	double r,err,erk,erkm1,erkm2,erkp1,hi,term,gamma,eta,psijm1,sum,absh,temp2,temp4,temp5,temp3,temp6,temp1,tau,rho_;
+	int knew,ip1,k,i,j,ki,kold,i_,ifail,hold,kp1,kp2,km1,km2,ns,nsp1,realns,im1,reali,nsm2,limit1,nsp2,limit2;
 	
 	while (true){  // Start step loop
 
 	  // If already past output point, interpolate solution and return
-	  if (abs(x-t) >= absdel){
+	  if (fabs(x-t) >= absdel){
 		  yout  = zeros(n_eqn,1);
 		  ypout = zeros(n_eqn,1);
 		  g(2)   = 1.0;
@@ -161,16 +161,16 @@
 		  // the derivative of the solution ypout      
 		  for (int j=1;j<=ki;j++){
 			  i_ = ki+1-j;
-			  yout  = yout  + g(i_+1)*phi.extract_column(i_+1);
-			  ypout = ypout + rho(i_+1)*phi.extract_column(i_+1);
+			  yout  = yout  + phi.extract_column(i_+1)*g(i_+1);
+			  ypout = ypout + phi.extract_column(i_+1)*rho(i_+1);
 		  }
-		  yout = y + hi*yout;
+		  yout = y + yout*hi;
 		  y    = yout;
 		  State_    = DE_STATE.DE_DONE; // Set return code
 		  t         = tout;             // Set independent variable
 		  told      = t;                // Store independent variable
 		  OldPermit = PermitTOUT;
-		  return;                       // Normal exit
+		  return error_matrix;                       // Normal exit
 	  }                         
 	  
 	  // If cannot go past output point and sufficiently close,
@@ -178,12 +178,12 @@
 	  if ( !PermitTOUT && ( fabs(tout-x) < fouru*fabs(x) ) ){
 		  h = tout - x;
 		  yp = f(x,yy);          // Compute derivative yp(x)
-		  y = yy + h*yp;                // Extrapolate vector from x to tout
+		  y = yy + yp*h;                // Extrapolate vector from x to tout
 		  State_    = DE_STATE.DE_DONE; // Set return code
 		  t         = tout;             // Set independent variable
 		  told      = t;                // Store independent variable
 		  OldPermit = PermitTOUT;
-		  return;                       // Normal exit
+		  return error_matrix;                       // Normal exit
 	  }
 	  
 	  // Test for too much work
@@ -216,9 +216,9 @@
 	//                                                                   
 
 	if (fabs(h) < fouru*fabs(x)){
-		h = sign_(fouru*abs(x),h);
+		h = sign_(fouru*fabs(x),h);
 		crash = true;
-		return;           // Exit 
+		return error_matrix;           // Exit 
 	}
 
 	p5eps  = 0.5*epsilon;
@@ -240,7 +240,7 @@
 	if (p5eps<round){
 		epsilon = 2.0*round*(1.0+fouru);
 		crash = true;
-		return;
+		return error_matrix;
 	}
 
 	if (start){
@@ -305,7 +305,7 @@
 	  
 	  nsp1 = ns+1;
 	  
-	  if (k>=ns)
+	  if (k>=ns){
 		  // Compute those components of alpha[*],beta[*],psi[*],sig[*] 
 		  // which are changed                                          
 		  beta(ns+1) = 1.0;
@@ -314,7 +314,7 @@
 		  temp1 = h*realns;
 		  sig(nsp1+1) = 1.0;
 		  if (k>=nsp1){
-			  for (int i=nspl;i<=k;i++){
+			  for (int i=nsp1;i<=k;i++){
 				  im1   = i-1;
 				  temp2 = psi_(im1+1);
 				  psi_(im1+1) = temp1;
@@ -328,47 +328,47 @@
 		  psi_(k+1) = temp1;
 		  
 		  // Compute coefficients g[*]; initialize v[*] and set w[*].
-		  if (ns>1)
+		  if (ns>1){
 			  // If order was raised, update diagonal part of v[*]
-			  if (k>kold)
+			  if (k>kold){
 				  temp4 = k*kp1;
 				  v(k+1) = 1.0/temp4;
 				  nsm2 = ns-2;
-				  for j=1:nsm2
+				  for (int j=1;j<=nsm2;j++){
 					  i = k-j;
 					  v(i+1) = v(i+1) - alpha(j+2)*v(i+2);
-				  end
-			  end
+				  }
+			  }
 			  
 			  // Update V[*] and set W[*]
 			  limit1 = kp1 - ns;
 			  temp5  = alpha(ns+1);
-			  for iq=1:limit1
+			  for (int iq=1;iq<=limit1;iq++){
 				  v(iq+1) = v(iq+1) - temp5*v(iq+2);
 				  w(iq+1) = v(iq+1);
-			  end
+			  }
 			  g(nsp1+1) = w(2);
-		  else
-			  for iq=1:k
+		  }else{
+			  for (int iq=1;iq<=k;iq++){
 				  temp3 = iq*(iq+1);
 				  v(iq+1) = 1.0/temp3;
 				  w(iq+1) = v(iq+1);
-			  end
-		  end
+			  }
+		  }
 		  
 		  // Compute the g[*] in the work vector w[*]
 		  nsp2 = ns + 2;
-		  if (kp1>=nsp2)
-			  for i=nsp2:kp1
+		  if (kp1>=nsp2){
+			  for (int i=nsp2;i<=kp1;i++){
 				  limit2 = kp2 - i;
 				  temp6  = alpha(i);
-				  for iq=1:limit2
+				  for (int iq=1;iq<=limit2;iq++){
 					  w(iq+1) = w(iq+1) - temp6*w(iq+2);
-				  end
+				  }
 				  g(i+1) = w(2);
-			  end
-		  end
-	  end // if K>=NS
+			  }
+		  }
+		} // if K>=NS
 	  
 	  //
 	  // End block 1
@@ -383,69 +383,69 @@
 	  //   
 	  
 	  // Change phi to phi star
-	  if (k>=nsp1)
-		  for i=nsp1:k
+	  if (k>=nsp1){
+		  for (int i=nsp1;i<=k;i++){
 			  temp1 = beta(i+1);
-			  for l=1:n_eqn
+			  for (int l=1;l<=n_eqn;l++){
 				  phi(l,i+1) = temp1 * phi(l,i+1);
-			  end
-		  end
-	  end
+			  }
+		  }
+	  }
 	  
 	  // Predict solution and differences 
-	  for l=1:n_eqn
+	  for (int l=1;l<=n_eqn;l++){
 		  phi(l,kp2+1) = phi(l,kp1+1);
 		  phi(l,kp1+1) = 0.0;
 		  p(l)       = 0.0;
-	  end
-	  for j=1:k
+	  }
+	  for (int j=1;j<=k;j++){
 		  i     = kp1 - j;
 		  ip1   = i+1;
 		  temp2 = g(i+1);
-		  for l=1:n_eqn
+		  for (int l=1;l<=n_eqn;l++){
 			  p(l)     = p(l) + temp2*phi(l,i+1);
 			  phi(l,i+1) = phi(l,i+1) + phi(l,ip1+1);
-		  end
-	  end
-	  if (nornd)
-		  p = y + h*p;
-	  else
-		  for l=1:n_eqn
+		  }
+	  }
+	  if (nornd){
+		  p = y + p*h;
+	  }else{
+		  for (int l=1;l<=n_eqn;l++){
 			  tau = h*p(l) - phi(l,16);
 			  p(l) = y(l) + tau;
 			  phi(l,17) = (p(l) - y(l)) - tau;
-		  end
-	  end
+		  }
+	  }
 	  xold = x;
 	  x = x + h;
-	  absh = abs(h);
-	  yp = func(x,p);
+	  absh = fabs(h);
+	  yp = f(x,p);
 	  
 	  // Estimate errors at orders k, k-1, k-2 
 	  erkm2 = 0.0;
 	  erkm1 = 0.0;
 	  erk = 0.0;
 	  
-	  for l=1:n_eqn
+	  for (int l=1;l<=n_eqn;l++){
 		  temp3 = 1.0/wt(l);
 		  temp4 = yp(l) - phi(l,1+1);
-		  if (km2> 0)
-			  erkm2 = erkm2 + ((phi(l,km1+1)+temp4)*temp3)...
+		  if (km2> 0){
+			  erkm2 = erkm2 + ((phi(l,km1+1)+temp4)*temp3)
 							 *((phi(l,km1+1)+temp4)*temp3);
-		  end
-		  if (km2>=0)
-			  erkm1 = erkm1 + ((phi(l,k+1)+temp4)*temp3)...
+		  }
+		  if (km2>=0){
+			  erkm1 = erkm1 + ((phi(l,k+1)+temp4)*temp3)
 							 *((phi(l,k+1)+temp4)*temp3);
-		  end
+		  }
 		  erk = erk + (temp4*temp3)*(temp4*temp3);
-	  end
+	  }
 	  
 	  if (km2> 0)
 		  erkm2 = absh*sig(km1+1)*gstr(km2+1)*sqrt(erkm2);
-	  end
+	  
 	  if (km2>=0)
 		  erkm1 = absh*sig(k+1)*gstr(km1+1)*sqrt(erkm1);
-	  end
+	  
 	  
 	  temp5 = absh*sqrt(erk);
 	  err = temp5*(g(k+1)-g(kp1+1));
@@ -453,16 +453,16 @@
 	  knew = k;
 	  
 	  // Test if order should be lowered 
-	  if (km2 >0)
+	  if (km2 >0){
 		  if (max(erkm1,erkm2)<=erk)
 			  knew=km1;
-		  end
-	  end
-	  if (km2==0)
+		  
+	  }
+	  if (km2==0){
 		  if (erkm1<=0.5*erk)
 			  knew=km1;
-		  end
-	  end
+		  
+	  }
 	  
 	  //
 	  // End block 2
@@ -475,7 +475,7 @@
 	  
 	  success = (err<=epsilon);
 	  
-	  if (~success)
+	  if (!success){
 	  
 		//
 		// Begin block 3
@@ -491,52 +491,52 @@
 		// Restore x, phi[*,*] and psi[*]
 		phase1 = false; 
 		x = xold;
-		for i=1:k
+		for (int i=1;i<=k;i++){
 			temp1 = 1.0/beta(i+1);
 			ip1 = i+1;
-			for l=1:n_eqn
+			for (int l=1;l<=n_eqn;l++){
 				phi(l,i+1)=temp1*(phi(l,i+1)-phi(l,ip1+1));
-			end
-		end
+			}
+		}
 		
-		if (k>=2)
-			for i=2:k
+		if (k>=2){
+			for (int i=2;i<=k;i++){
 				psi_(i) = psi_(i+1) - h;
-			end
-		end
+			}
+		}
 		
 		// On third failure, set order to one. 
 		// Thereafter, use optimal step size   
 		ifail = ifail+1;
 		temp2 = 0.5;
-		if (ifail>3) 
+		if (ifail>3){
 		  if (p5eps < 0.25*erk)
 			  temp2 = sqrt(p5eps/erk);
-		  end
-		end
+		  
+		}
 		if (ifail>=3)
 			knew = 1;
-		end
+		
 		h = temp2*h;
 		k = knew;
-		if (abs(h)<fouru*abs(x))
+		if (fabs(h)<fouru*fabs(x)){
 			crash = true;
-			h = sign_(fouru*abs(x), h);
+			h = sign_(fouru*fabs(x), h);
 			epsilon = epsilon*2.0;
-			return;                 // Exit 
-		end
+			return error_matrix;                 // Exit 
+		}
 		
 		//
 		// End block 3, return to start of block 1
 		//
 		
-	  end  // end if(success)
+	  }  // end if(success)
 	  
 	  if (success)
 		  break;
-	  end
 	  
-	end
+	  
+	}
 
 	//
 	// Begin block 4
@@ -551,29 +551,29 @@
 
 	// Correct and evaluate
 	temp1 = h*g(kp1+1);
-	if (nornd)
-		for l=1:n_eqn
+	if (nornd){
+		for (int l=1;l<=n_eqn;l++){
 			y(l) = p(l) + temp1*(yp(l) - phi(l,2));
-		end
-	else
-		for l=1:n_eqn
-			rho = temp1*(yp(l) - phi(l,2)) - phi(l,17);
-			y(l) = p(l) + rho;
-			phi(l,16) = (y(l) - p(l)) - rho;
-		end
-	end
-	yp = func(x,y);
+		}
+	}else{
+		for (int l=1;l<=n_eqn;l++){
+			rho_ = temp1*(yp(l) - phi(l,2)) - phi(l,17);
+			y(l) = p(l) + rho_;
+			phi(l,16) = (y(l) - p(l)) - rho_;
+		}
+	}
+	yp = f(x,y);
 
 	// Update differences for next step 
-	for l=1:n_eqn
+	for (int l=1;l<=n_eqn;l++){
 		phi(l,kp1+1) = yp(l) - phi(l,2);
 		phi(l,kp2+1) = phi(l,kp1+1) - phi(l,kp2+1);
-	end
-	for i=1:k
-		for l=1:n_eqn
+	}
+	for (int i=1;i<=k;i++){
+		for (int l=1;l<=n_eqn;l++){
 			phi(l,i+1) = phi(l,i+1) + phi(l,kp1+1);
-		end
-	end
+		}
+	}
 
 	// Estimate error at order k+1 unless               
 	// - in first phase when always raise order,        
@@ -582,68 +582,68 @@
 	erkp1 = 0.0;
 	if ( (knew==km1) || (k==12) )
 		phase1 = false;
-	end
+	
 
-	if (phase1)
+	if (phase1){
 		k = kp1;
 		erk = erkp1;
-	else
-		if (knew==km1)
+	}else{
+		if (knew==km1){
 			// lower order 
 			k = km1;
 			erk = erkm1;
-		else
-			if (kp1<=ns)
-				for l=1:n_eqn
+		}else{
+			if (kp1<=ns){
+				for (int l=1;l<=n_eqn;l++){
 					erkp1 = erkp1 + (phi(l,kp2+1)/wt(l))*(phi(l,kp2+1)/wt(l));
-				end
+				}
 				erkp1 = absh*gstr(kp1+1)*sqrt(erkp1);
 				// Using estimated error at order k+1, determine 
 				// appropriate order for next step               
-				if (k>1)
-					if ( erkm1<=min(erk,erkp1))
+				if (k>1){
+					if ( erkm1<=min(erk,erkp1)){
 						// lower order
 						k=km1; erk=erkm1;
-					else
-						if ( (erkp1<erk) && (k~=12) )
+					}else{
+						if ( (erkp1<erk) && (k!=12) ){
 							// raise order 
 							k=kp1;
 							erk=erkp1;
-						end
-					end
-				elseif (erkp1<0.5*erk)
+						}
+					}
+				}else if (erkp1<0.5*erk){
 					// raise order
 					// Here erkp1 < erk < max(erkm1,ermk2) else    
 					// order would have been lowered in block 2.   
 					// Thus order is to be raised                  
 					k = kp1;
 					erk = erkp1;
-				end
-			end // end if kp1<=ns
-		end // end if knew!=km1
-	end // end if !phase1
+				}
+			} // end if kp1<=ns
+		} // end if knew!=km1
+	} // end if !phase1
 
 	// With new order determine appropriate step size for next step
-	if ( phase1 || (p5eps>=erk*two(k+2)) )
+	if ( phase1 || (p5eps>=erk*two(k+2)) ){
 		hnew = 2.0*h;
-	else
-		if (p5eps<erk)
+	}else{
+		if (p5eps<erk){
 			temp2 = k+1;
-			r = p5eps/erk^(1.0/temp2);
+			r = pow(p5eps/erk,(1.0/temp2));
 			hnew = absh*max(0.5, min(0.9,r));
-			hnew = sign_(max(hnew, fouru*abs(x)), h);
-		else
+			hnew = sign_(max(hnew, fouru*fabs(x)), h);
+		}else{
 			hnew = h;
-		end
-	end
+		}
+	}
 	h = hnew;
-
+	cout<<"aaaaa1\n";
 	//
 	// End block 4
 	//
 
 	  // Test for too small tolerances
-	  if (crash)
+	  if (crash){
 		  State_    = DE_STATE.DE_BADACC;
 		  relerr    = epsilon*releps;       // Modify relative and absolute
 		  abserr    = epsilon*abseps;       // accuracy requirements
@@ -651,8 +651,8 @@
 		  t         = x;
 		  told      = t;
 		  OldPermit = true;
-		  return;                       // Weak failure exit
-	  end
+		  return error_matrix;                       // Weak failure exit
+	  }
 	  
 	  nostep = nostep+1;  // Count total number of steps
 	  
@@ -661,11 +661,11 @@
 	  kle4 = kle4+1;
 	  if (kold>  4)
 		  kle4 = 0;
-	  end
+	  
 	  if (kle4>=50)
 		  stiff = true;
-	  end
 	  
+	  cout<<"aaaaa2\n";
 	} // End step loop
 	  
 	//   if ( State_==DE_STATE.DE_INVPARAM )
@@ -684,5 +684,5 @@
 	//   
 	// end
 	 
-	 
+	return y;
 }
