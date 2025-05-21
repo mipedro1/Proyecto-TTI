@@ -3,11 +3,10 @@
 
  Matrix& DEInteg(Matrix& f (double t,Matrix& y),double t,double tout,double relerr,double abserr,int n_eqn,Matrix& y){
 	// maxnum = 500;
-	Matrix& error_matrix=zeros(6,1);
 	double eps=2.22044604925031e-16;
 	double twou  = 2*eps;
 	double fouru = 4*eps;
-
+	
 	struct{ 
 		int DE_INIT= 1;      // Restart integration
 		int DE_DONE= 2;      // Successful step
@@ -39,28 +38,29 @@
 	tw(14)=8192.0;
 	Matrix &two=tw.transpose();
 	
-	Matrix& g=zeros(14);
-	g(1)=1.0; 
-	g(2)=0.5; 
-	g(3)=0.0833; 
-	g(4)=0.0417;
-	g(5)=0.0264;
-	g(6)=0.0188;
-	g(7)=0.0143;
-	g(8)=0.0114;
-	g(9)=0.00936;
-	g(10)=0.00789;
-	g(11)=0.00679;
-	g(12)=0.00592;
-	g(13)=0.00524;
-	g(14)=0.00468;
-	Matrix& gstr=g;
+	Matrix& gi=zeros(14);
+	gi(1)=1.0; 
+	gi(2)=0.5; 
+	gi(3)=0.0833; 
+	gi(4)=0.0417;
+	gi(5)=0.0264;
+	gi(6)=0.0188;
+	gi(7)=0.0143;
+	gi(8)=0.0114;
+	gi(9)=0.00936;
+	gi(10)=0.00789;
+	gi(11)=0.00679;
+	gi(12)=0.00592;
+	gi(13)=0.00524;
+	gi(14)=0.00468;
+	Matrix& gstr=gi;
 
 	Matrix& yy    = zeros(n_eqn,1);    // Allocate vectors with proper dimension
 	Matrix& wt    = zeros(n_eqn,1);
 	Matrix& p     = zeros(n_eqn,1);
 	Matrix& yp    = zeros(n_eqn,1);
 	Matrix& phi   = zeros(n_eqn,17);
+	Matrix& g     = zeros(14,1);
 	Matrix& sig   = zeros(14,1);
 	Matrix rho   = zeros(14,1);
 	Matrix& w     = zeros(13,1);
@@ -68,18 +68,18 @@
 	Matrix& beta  = zeros(13,1);
 	Matrix& v     = zeros(13,1);
 	Matrix& psi_  = zeros(13,1);
-
+	
 	// while(true)
 
 	// Return, if output time equals input time
 
 	if (t==tout)    // No integration
-		return error_matrix;
+		return y;
 	
 
 	// Test for improper parameters
 
-	double epsilon = max(relerr,abserr);
+	double epsilon = fmax(relerr,abserr);
 
 	if ( ( relerr <  0.0         ) ||             // Negative relative error bound
 		 ( abserr <  0.0         ) ||             // Negative absolute error bound
@@ -88,7 +88,7 @@
 		 ( (State_ != DE_STATE.DE_INIT) &&       
 		 (t != told)           ) ){
 		 State_ = DE_STATE.DE_INVPARAM;              // Set error code
-		 return error_matrix;                                     // Exit
+		 return y;                                     // Exit
 	}
 
 	// On each call set interval of integration and counter for
@@ -119,7 +119,7 @@
 		x      = t;
 		yy     = y;
 		delsgn = sign_(1.0, del);
-		h      = sign_( max(fouru*fabs(x), fabs(tout-x)), tout-x );
+		h      = sign_( fmax(fouru*fabs(x), fabs(tout-x)), tout-x );
 	}
 	
 	Matrix& yout=zeros(n_eqn,1);
@@ -143,6 +143,7 @@
 			  temp1 = i;
 			  w(i+1) = 1.0/temp1;
 		  }
+		  
 		  // Compute g[*]
 		  term = 0.0;
 		  for (int j=2;j<=ki;j++){
@@ -161,16 +162,17 @@
 		  // the derivative of the solution ypout      
 		  for (int j=1;j<=ki;j++){
 			  i_ = ki+1-j;
-			  yout  = yout  + phi.extract_column(i_+1)*g(i_+1);
-			  ypout = ypout + phi.extract_column(i_+1)*rho(i_+1);
+			  yout  = yout  + (phi.extract_column(i_+1)*g(i_+1)).transpose();
+			  ypout = ypout + (phi.extract_column(i_+1)*rho(i_+1)).transpose();
 		  }
+		  
 		  yout = y + yout*hi;
 		  y    = yout;
 		  State_    = DE_STATE.DE_DONE; // Set return code
 		  t         = tout;             // Set independent variable
 		  told      = t;                // Store independent variable
 		  OldPermit = PermitTOUT;
-		  return error_matrix;                       // Normal exit
+		  return y;                       // Normal exit
 	  }                         
 	  
 	  // If cannot go past output point and sufficiently close,
@@ -183,7 +185,7 @@
 		  t         = tout;             // Set independent variable
 		  told      = t;                // Store independent variable
 		  OldPermit = PermitTOUT;
-		  return error_matrix;                       // Normal exit
+		  return y;                       // Normal exit
 	  }
 	  
 	  // Test for too much work
@@ -200,7 +202,7 @@
 	//   end
 	  
 	  // Limit step size, set weight vector and take a step
-	  h  = sign_(min(fabs(h), fabs(tend-x)), h);
+	  h  = sign_(fmin(fabs(h), fabs(tend-x)), h);
 	  for (int l=1;l<=n_eqn;l++){
 		  wt(l) = releps*fabs(yy(l)) + abseps;
 	  }
@@ -218,9 +220,9 @@
 	if (fabs(h) < fouru*fabs(x)){
 		h = sign_(fouru*fabs(x),h);
 		crash = true;
-		return error_matrix;           // Exit 
+		return y;           // Exit 
 	}
-
+	
 	p5eps  = 0.5*epsilon;
 	crash  = false;
 	g(2)   = 1.0;
@@ -240,7 +242,7 @@
 	if (p5eps<round){
 		epsilon = 2.0*round*(1.0+fouru);
 		crash = true;
-		return error_matrix;
+		return y;
 	}
 
 	if (start){
@@ -257,7 +259,7 @@
 	  if (epsilon<16.0*sum*h*h)
 		  absh=0.25*sqrt(epsilon/sum);
 	  
-	  h    = sign_(max(absh, fouru*fabs(x)), h);
+	  h    = sign_(fmax(absh, fouru*fabs(x)), h);
 	  hold = 0.0;
 	  hnew = 0.0;
 	  k    = 1;
@@ -335,8 +337,8 @@
 				  v(k+1) = 1.0/temp4;
 				  nsm2 = ns-2;
 				  for (int j=1;j<=nsm2;j++){
-					  i = k-j;
-					  v(i+1) = v(i+1) - alpha(j+2)*v(i+2);
+					  i_ = k-j;
+					  v(i_+1) = v(i_+1) - alpha(j+2)*v(i_+2);
 				  }
 			  }
 			  
@@ -399,12 +401,12 @@
 		  p(l)       = 0.0;
 	  }
 	  for (int j=1;j<=k;j++){
-		  i     = kp1 - j;
-		  ip1   = i+1;
-		  temp2 = g(i+1);
+		  i_     = kp1 - j;
+		  ip1   = i_+1;
+		  temp2 = g(i_+1);
 		  for (int l=1;l<=n_eqn;l++){
-			  p(l)     = p(l) + temp2*phi(l,i+1);
-			  phi(l,i+1) = phi(l,i+1) + phi(l,ip1+1);
+			  p(l)     = p(l) + temp2*phi(l,i_+1);
+			  phi(l,i_+1) = phi(l,i_+1) + phi(l,ip1+1);
 		  }
 	  }
 	  if (nornd){
@@ -453,16 +455,16 @@
 	  knew = k;
 	  
 	  // Test if order should be lowered 
-	  if (km2 >0){
-		  if (max(erkm1,erkm2)<=erk)
+	  if (km2 >0)
+		  if (fmax(erkm1,erkm2)<=erk)
 			  knew=km1;
 		  
-	  }
-	  if (km2==0){
+	  
+	  if (km2==0)
 		  if (erkm1<=0.5*erk)
 			  knew=km1;
 		  
-	  }
+	  
 	  
 	  //
 	  // End block 2
@@ -523,7 +525,7 @@
 			crash = true;
 			h = sign_(fouru*fabs(x), h);
 			epsilon = epsilon*2.0;
-			return error_matrix;                 // Exit 
+			return y;                 // Exit 
 		}
 		
 		//
@@ -630,14 +632,13 @@
 		if (p5eps<erk){
 			temp2 = k+1;
 			r = pow(p5eps/erk,(1.0/temp2));
-			hnew = absh*max(0.5, min(0.9,r));
-			hnew = sign_(max(hnew, fouru*fabs(x)), h);
+			hnew = absh*fmax(0.5, min(0.9,r));
+			hnew = sign_(fmax(hnew, fouru*fabs(x)), h);
 		}else{
 			hnew = h;
 		}
 	}
 	h = hnew;
-	cout<<"aaaaa1\n";
 	//
 	// End block 4
 	//
@@ -651,7 +652,7 @@
 		  t         = x;
 		  told      = t;
 		  OldPermit = true;
-		  return error_matrix;                       // Weak failure exit
+		  return y;                       // Weak failure exit
 	  }
 	  
 	  nostep = nostep+1;  // Count total number of steps
@@ -664,8 +665,6 @@
 	  
 	  if (kle4>=50)
 		  stiff = true;
-	  
-	  cout<<"aaaaa2\n";
 	} // End step loop
 	  
 	//   if ( State_==DE_STATE.DE_INVPARAM )
