@@ -2,8 +2,8 @@
 
 Matrix& PrecMatrix (double Mjd_1,double  Mjd_2){
 	double T,dT,zeta,z,theta;
-	T  = (Mjd_1-MJD_J2000)/36525;
-	dT = (Mjd_2-Mjd_1)/36525;
+	T  = (Mjd_1-MJD_J2000)/36525.0;
+	dT = (Mjd_2-Mjd_1)/36525.0;
 
 	// Precession angles
 	zeta  =  ( (2306.2181+(1.39656-0.000139*T)*T)+ 

@@ -8,7 +8,7 @@ Matrix& Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matr
 	}
 
 	// Clenshaw algorithm
-	double tau = (2*t-Ta-Tb)/(Tb-Ta);  
+	double tau = (2.0*t-Ta-Tb)/(Tb-Ta);  
 
 	Matrix f1 = zeros(1,3);
 	Matrix f2 = zeros(1,3);
@@ -17,7 +17,7 @@ Matrix& Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matr
 	for (int i = N; i >= 2; --i){
 		old_f1 = f1;
 		aux(1)=Cx(i); aux(2)=Cy(i); aux(3)=Cz(i);
-		f1 = f1*2*tau-f2+aux;
+		f1 = f1*2.0*tau-f2+aux;
 		f2 = old_f1;
 	}
 	Matrix aux2=zeros(1,3);

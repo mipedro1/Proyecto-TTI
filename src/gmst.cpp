@@ -13,6 +13,6 @@ double gmst(double Mjd_UT1){
 	gmst  = 24110.54841 + 8640184.812866*T_0 + 1.002737909350795*UT1
 			+ (0.093104-6.2e-6*T)*T*T;    // [s]
 
-	return 2*M_PI*Frac(gmst/Secs);       // [rad], 0..2pi
+	return 2.0*M_PI*Frac(gmst/Secs);       // [rad], 0..2pi
 
 }

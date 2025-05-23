@@ -3,7 +3,7 @@
 double Mjday_TDB(double Mjd_TT){
 	
 	// Compute Julian Centureis of TT
-	double T_TT = (Mjd_TT - 51544.5)/36525;
+	double T_TT = (Mjd_TT - 51544.5)/36525.0;
 
 	// Compute Modified Julian Date of TDB
 	return Mjd_TT + ( 0.001658*sin(628.3076*T_TT + 6.2401) 
@@ -12,6 +12,6 @@ double Mjday_TDB(double Mjd_TT){
 					 +   0.000005*sin(606.9777*T_TT+4.0212) 
 					 +   0.000005*sin(52.9691*T_TT+0.4444) 
 					 +   0.000002*sin(21.3299*T_TT+5.5431)
-					 +   0.000010*sin(628.3076*T_TT+4.2490) )/86400;
+					 +   0.000010*sin(628.3076*T_TT+4.2490) )/86400.0;
 
 }

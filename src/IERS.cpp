@@ -16,8 +16,8 @@ tuple<double,double,double,double,double,double,double,double,double> IERS(doubl
 		}
 		Matrix preeopdata = eopdata.extract_column(i);      
 		Matrix nexteopdata = eopdata.extract_column(i+1);   
-		 mfme = 1440*(Mjd_UTC-floor(Mjd_UTC));
-		 fixf = mfme/1440;
+		 mfme = 1440.0*(Mjd_UTC-floor(Mjd_UTC));
+		 fixf = mfme/1440.0;
 		// Setting of IERS Earth rotation parameters
 		// (UT1-UTC [s], TAI-UTC [s], x ["], y ["])
 		 x_pole  = preeopdata(5)+(nexteopdata(5)-preeopdata(5))*fixf;

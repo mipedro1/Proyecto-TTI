@@ -4,8 +4,8 @@
  Matrix& DEInteg(Matrix& f (double t,Matrix& y),double t,double tout,double relerr,double abserr,int n_eqn,Matrix& y){
 	// maxnum = 500;
 	double eps=2.22044604925031e-16;
-	double twou  = 2*eps;
-	double fouru = 4*eps;
+	double twou  = 2.0*eps;
+	double fouru = 4.0*eps;
 	
 	struct{ 
 		int DE_INIT= 1;      // Restart integration
@@ -124,8 +124,8 @@
 	
 	Matrix& yout=zeros(n_eqn,1);
 	Matrix& ypout=zeros(n_eqn,1);
-	double r,err,erk,erkm1,erkm2,erkp1,hi,term,gamma,eta,psijm1,sum,absh,temp2,temp4,temp5,temp3,temp6,temp1,tau,rho_;
-	int knew,ip1,k,i,j,ki,kold,i_,ifail,hold,kp1,kp2,km1,km2,ns,nsp1,realns,im1,reali,nsm2,limit1,nsp2,limit2;
+	double reali,ns,realns,r,err,erk,erkm1,erkm2,erkp1,hi,term,gamma,eta,psijm1,sum,absh,temp2,temp4,temp5,temp3,temp6,temp1,tau,rho_;
+	int knew,ip1,k,i,j,ki,kold,i_,ifail,hold,kp1,kp2,km1,km2,nsp1,im1,nsm2,limit1,nsp2,limit2;
 	
 	while (true){  // Start step loop
 
@@ -352,7 +352,7 @@
 			  g(nsp1+1) = w(2);
 		  }else{
 			  for (int iq=1;iq<=k;iq++){
-				  temp3 = iq*(iq+1);
+				  temp3 = iq*(iq+1.0);
 				  v(iq+1) = 1.0/temp3;
 				  w(iq+1) = v(iq+1);
 			  }
@@ -603,7 +603,7 @@
 				// Using estimated error at order k+1, determine 
 				// appropriate order for next step               
 				if (k>1){
-					if ( erkm1<=min(erk,erkp1)){
+					if ( erkm1<=fmin(erk,erkp1)){
 						// lower order
 						k=km1; erk=erkm1;
 					}else{
@@ -632,7 +632,7 @@
 		if (p5eps<erk){
 			temp2 = k+1;
 			r = pow(p5eps/erk,(1.0/temp2));
-			hnew = absh*fmax(0.5, min(0.9,r));
+			hnew = absh*fmax(0.5, fmin(0.9,r));
 			hnew = sign_(fmax(hnew, fouru*fabs(x)), h);
 		}else{
 			hnew = h;
