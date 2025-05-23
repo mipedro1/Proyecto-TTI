@@ -18,7 +18,7 @@
 
 	int State_ = DE_STATE.DE_INIT;
 	bool PermitTOUT = true;         // Allow integration past tout by default
-	int told = 0;
+	double told = 0.0;
 
 	// Powers of two (two(n)=2^n)
 	Matrix& tw=zeros(14);
@@ -274,7 +274,7 @@
 		  }
 	  }
 	}
-
+	cout<<"beta\n"<<beta<<endl;
 	//                                                                   
 	// End block 0                                                       
 	//                                                                   
@@ -283,7 +283,6 @@
 	// Repeat blocks 1, 2 (and 3) until step is successful               
 	//                                                                   
 	while(true){
-	  
 	  //                                                                 
 	  // Begin block 1                                                   
 	  //                                                                 
@@ -533,7 +532,6 @@
 		//
 		
 	  }  // end if(success)
-	  
 	  if (success)
 		  break;
 	  
