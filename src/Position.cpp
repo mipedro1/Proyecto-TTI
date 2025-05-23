@@ -1,7 +1,7 @@
 #include "..\include\Position.hpp"
 
 
-Matrix Position(double lon,double  lat, double h){
+Matrix& Position(double lon,double  lat, double h){
 	
 	double R_equ = R_Earth;
 	double f     = f_Earth;
@@ -13,7 +13,7 @@ Matrix Position(double lon,double  lat, double h){
 	// Position vector 
 	double N = R_equ / sqrt(1.0-e2*SinLat*SinLat);
 	
-	Matrix r(3);
+	Matrix& r=zeros(3);
 	r(1) =  (         N+h)*CosLat*cos(lon);
 	r(2) =  (         N+h)*CosLat*sin(lon);
 	r(3) =  ((1.0-e2)*N+h)*SinLat;

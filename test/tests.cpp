@@ -580,10 +580,10 @@ int I1_AccelPointMass_01() {
 	
 	
 	Matrix A(1, 3);
-	A(1,1) =1; A(1,2) =2; A(1,3)=3;
+	A(1,1) =1.0; A(1,2) =2.0; A(1,3)=3.0;
 	
 	Matrix B(1, 3);
-	B(1,1) =4; B(1,2) =5; B(1,3)=6;
+	B(1,1) =4.0; B(1,2) =5.0; B(1,3)=6.0;
 	 
 	double g=9.876;
 	       
@@ -693,11 +693,11 @@ int I1_timediff_01() {
     
     
     auto [UT1_TAI, UTC_GPS, UT1_GPS, TT_UTC, GPS_UTC] = timediff(UT1_UTC, TAI_UTC);
-	double ut1_tai=-37;
-	double utc_gps=-18;
-	double ut1_gps=-18;
+	double ut1_tai=-37.0;
+	double utc_gps=-18.0;
+	double ut1_gps=-18.0;
 	double tt_utc=69.184;
-	double gps_utc=18;
+	double gps_utc=18.0;
 	
     _assert( (fabs(UT1_TAI-(ut1_tai)))<1e-10);
 	_assert( (fabs(UTC_GPS-(utc_gps)))<1e-10);
@@ -760,7 +760,7 @@ int I1_IERS_01() {
 	double de=-2.47881680412219e-08;
 	double dx=-8.41764150670523e-10     ;
 	double dy=-1.56618880121342e-09;
-	double tai=29;
+	double tai=29.0;
     _assert( (fabs(x_pole-(x)))<1e-10);
 	_assert( (fabs(y_pole-(y)))<1e-10);
 	_assert( (fabs(utl-(UT1_UTC)))<1e-10);
@@ -823,7 +823,7 @@ int I1_AccelHarmonic_01() {
     
 	
     Matrix P(3,1);
-	P(1,1) =7000e3; P(2,1) =0; P(3,1)=0;
+	P(1,1) =7000e3; P(2,1) =0.0; P(3,1)=0.0;
 	
 	Matrix E=eye(3);
 	
@@ -1041,7 +1041,7 @@ int I1_G_Accel_01() {
 	
 	
 	Matrix P(3,1);
-	P(1,1) =7000e3; P(2,1) =0; P(3,1)=0;
+	P(1,1) =7000e3; P(2,1) =0.0; P(3,1)=0.0;
 	
 	Matrix &E=eye(3);
 	
@@ -1057,15 +1057,15 @@ int I1_GHAMatrix_01() {
     
 	
 	Matrix &x=zeros(3,3);
-	x(1,1)=-0.184404138193381;x(1,2)=0.982850504307322;x(1,3)=0;
-	x(2,1)=-0.982850504307322;x(2,2)=-0.184404138193381 ;x(2,3)=0;
-	x(3,1)=0;x(3,2)=0;x(3,3)=1;
+	x(1,1)=-0.184404138193381;x(1,2)=0.982850504307322;x(1,3)=0.0;
+	x(2,1)=-0.982850504307322;x(2,2)=-0.184404138193381 ;x(2,3)=0.0;
+	x(3,1)=0.0;x(3,2)=0.0;x(3,3)=1.0;
 	
 	
 	
 	
 	
-    _assert(m_equals(GHAMatrix(59580),x, 1e-10));
+    _assert(m_equals(GHAMatrix(59580.0),x, 1e-10));
 
 
     

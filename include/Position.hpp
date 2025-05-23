@@ -5,6 +5,6 @@
 #include <cmath>
 #include "..\include\SAT_Const.hpp"
 
-Matrix Position(double lon,double  lat, double h);
+Matrix& Position(double lon,double  lat, double h);
 
 #endif
