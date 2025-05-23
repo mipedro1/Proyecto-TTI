@@ -30,6 +30,7 @@ Matrix::Matrix(const int v_size){
 Matrix::Matrix(const int n_row,const int n_column){
 	if(n_row <=0 || n_column<=0){
 		cout << "Matrix: Error in n_row or in n_column\n";
+		cout << "Matrix\n"<<*this<<endl;
 		exit(EXIT_FAILURE);
 	}
 	
@@ -60,6 +61,7 @@ double& Matrix::operator () (const int n){
 double& Matrix::operator () (const int n_row,const int n_column){
 	if(n_row <=0 || n_column<=0 || n_row > this->n_row || n_column > this->n_column){
 	cout << "Matrix: Error in n_row or in n_column\n";
+	cout << "Matrix\n"<<*this<<endl;
 	exit(EXIT_FAILURE);
 	}
 	return this->data[n_row-1][n_column-1];
