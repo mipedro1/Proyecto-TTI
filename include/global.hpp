@@ -1,3 +1,20 @@
+// $Header$
+//--------------------------------------------------------------------------------
+// global
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file global.h
+ *  @brief This header file contains auxiliar data used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #ifndef _GLOBAL_
 #define _GLOBAL_
 
