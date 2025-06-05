@@ -1,3 +1,20 @@
+// $Header$
+//--------------------------------------------------------------------------------
+// rpoly
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file rpoly.hpp
+ *  @brief This header file contains functions to find roots
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #ifndef BEGIN_C_DECLS
 #define BEGIN_C_DECLS
 
