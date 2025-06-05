@@ -261,16 +261,6 @@ Matrix& zeros(int n);
 //-----------------------------------------------------------------------------------------------
 double norm(Matrix& m);
 
-//-----------------------------------------------------------------------------------------------
-// roots( Matrix& poly)
-//-----------------------------------------------------------------------------------------------
-/**
- *	@brief this function calculates the roots of a polynomial represented by the matrix coefficients
- * 
- *      @return Result. A matrix containing the roots of the polynomial.
- */
-//-----------------------------------------------------------------------------------------------
-Matrix& roots( Matrix& poly);
 
 
 #endif

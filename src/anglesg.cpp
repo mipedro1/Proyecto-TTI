@@ -86,24 +86,41 @@ tuple<Matrix&,Matrix&> anglesg ( double az1,double az2,double az3,double el1,dou
 	double d1s = D(2,1)*a1-D(2,2)+D(2,3)*a3;
 	double d2s = D(2,1)*b1+D(2,3)*b3;
 
-	double Ccye = 2.0*Lm2.dot(Rs2);
+	double Ccye = 2.0*Lm2.transpose().dot(Rs2.transpose());
 	
-	Matrix& poly=zeros(9);
-	poly(1)=  1.0;  // R2^8... polynomial
-	poly(2)=  0.0;
-	poly(3)=  -(pow(d1s,2) + d1s*Ccye + pow((norm(Rs2)),2));
-	poly(4)=  0.0;
-	poly(5)=  0.0;
-	poly(6)=  -GM_Earth*(d2s*Ccye + 2*d1s*d2s);
-	poly(7)=  0.0;
-	poly(8)=  0.0;
-	poly(9)=  pow(-GM_Earth,2)*pow(d2s,2);
-	Matrix& rootarr = roots( poly );
+	Matrix poly = zeros(1, 9);
+	poly(1, 1) = 1.0;  // R2^8... polynomial
+	poly(1, 2) = 0.0;
+	poly(1, 3) = -(pow(d1s, 2) + d1s * Ccye + pow((norm(Rs2)), 2));
+	poly(1, 4) = 0.0;
+	poly(1, 5) = 0.0;
+	poly(1, 6) = -GM_Earth * (d2s * Ccye + 2 * d1s * d2s);
+	poly(1, 7) = 0.0;
+	poly(1, 8) = 0.0;
+	poly(1, 9) = pow(-GM_Earth, 2) * pow(d2s, 2);
+	
+	Matrix coef=zeros(poly.n_column);  
+	Matrix zeror=zeros(poly.n_column);  
+	Matrix zeroi=zeros(poly.n_column); 
+		
+	for (int i = 1; i <= poly.n_column; ++i) {  
+		coef(1, i) = poly(1, i); 
+	}
+	int num_roots = real_poly_roots(&coef(1, 1), poly.n_column - 1, &zeror(1, 1), &zeroi(1, 1));
 
+	Matrix& rootarr = zeros(num_roots, 1);
+	int real_root_count = 0; 
+	for (int i = 1; i <= num_roots; ++i) {
+		if (fabs(zeroi(i)) < 1e-8) {  
+			real_root_count++; 
+			rootarr(real_root_count, 1) = zeror(i);  
+		}
+	}
+	
 	double bigr2= -99999990.0;
 
 	for (int j=1;j<=8;j++){
-		if ( rootarr(j) > bigr2 ) & ( isreal(rootarr(j)) )
+		if ( rootarr(j) > bigr2  )
 			bigr2= rootarr(j);
 		  
 	}
@@ -159,7 +176,7 @@ tuple<Matrix&,Matrix&> anglesg ( double az1,double az2,double az3,double el1,dou
 		
 		if ( ll <= 8 ){
 			u = GM_Earth/(pow(magr2,3));
-			rdot= r2.dot(v2)/magr2;
+			rdot= r2.transpose().dot(v2.transpose())/magr2;
 			udot= (-3.0*GM_Earth*rdot)/(pow(magr2,4));
 			
 			tausqr= tau1*tau1;
