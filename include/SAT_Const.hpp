@@ -21,7 +21,9 @@
 #include <cmath>  // Para las funciones trigonométricas
 
 // Mathematical constants
+#ifndef M_PI
 static constexpr double M_PI = 3.14159265358979323846;  // Pi
+#endif
 
 static constexpr double pi2  = 2.0 * M_PI;                // 2pi
 static constexpr double Rad  = M_PI / 180.0;            // Radians per degree
