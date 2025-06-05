@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// PrecMatrix
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file PrecMatrix.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\PrecMatrix.hpp"
 
 Matrix& PrecMatrix (double Mjd_1,double  Mjd_2){

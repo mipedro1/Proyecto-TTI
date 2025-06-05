@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// VarEqn
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file VarEqn.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\VarEqn.hpp"
 
 Matrix& VarEqn(double x,Matrix& yPhi){

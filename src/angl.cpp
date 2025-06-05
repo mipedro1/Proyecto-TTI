@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// angl
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/05
+//
+/** @file angl.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//-------------------------------------------------------------------------------- 
 #include "..\include\angl.hpp"
 
 double angl ( Matrix& vec1, Matrix& vec2 ){

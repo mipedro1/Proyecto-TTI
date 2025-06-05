@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// PrecMatrix
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file PrecMatrix.cpp
+ *  @brief Functions to find roots
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 // Adapted in 2013 by Ethan Eade from NETLIB program 493:
 //    rpoly.f, Jenkins and Traub, 1972
 // Original comments preserved (with small modifications) below.

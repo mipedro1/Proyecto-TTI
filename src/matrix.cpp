@@ -1,3 +1,21 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// matrix
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file matrix.cpp
+ *  @brief This class represents a mathematical matrix and provides various 
+ *		   matrix operations 
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "../include/matrix.hpp"
 
 

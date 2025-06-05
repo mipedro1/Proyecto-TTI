@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// anglesg
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/05
+//
+/** @file anglesg.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\anglesg.hpp"
 
 tuple<Matrix&,Matrix&> anglesg ( double az1,double az2,double az3,double el1,double el2,double el3,double Mjd1,double Mjd2,double Mjd3,Matrix& Rs1,Matrix& Rs2,Matrix& Rs3 ){

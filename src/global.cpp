@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// global
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file global.cpp
+ *  @brief Auxiliar data used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "../include/global.hpp"
 
  Param AuxParam;

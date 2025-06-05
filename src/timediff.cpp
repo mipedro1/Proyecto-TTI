@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// timediff
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file timediff.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\timediff.hpp"
 
 tuple<double,double,double,double,double> timediff(double UT1_UTC, double TAI_UTC){

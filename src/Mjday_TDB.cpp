@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// Mjday_TDB
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file Mjday_TDB.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\Mjday_TDB.hpp"
 
 double Mjday_TDB(double Mjd_TT){

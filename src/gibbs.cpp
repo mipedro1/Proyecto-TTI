@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// gibbs
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/05
+//
+/** @file gibbs.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\gibbs.hpp"
 
 tuple<Matrix&,double,double,double,string> gibbs( Matrix& r1,Matrix& r2,Matrix& r3){

@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// AccelHarmonic
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file AccelHarmonic.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//-------------------------------------------------------------------------------- 
 #include "..\include\AccelHarmonic.hpp"
 
  Matrix& AccelHarmonic(Matrix& r, Matrix& E, double n_max,double m_max){

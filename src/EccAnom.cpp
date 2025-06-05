@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// EccAnom
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file EccAnom.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\EccAnom.hpp"
 
 double EccAnom (double M, double e){

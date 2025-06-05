@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// MeasUpdate
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file MeasUpdate.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\MeasUpdate.hpp"
 
 tuple<Matrix&,Matrix&,Matrix&> MeasUpdate(Matrix& x, double z,double g,double s,Matrix& G,Matrix& P, int n){

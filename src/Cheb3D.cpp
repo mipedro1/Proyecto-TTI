@@ -1,3 +1,20 @@
+// $Source$
+//--------------------------------------------------------------------------------
+// Cheb3D
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file Cheb3D.cpp
+ *  @brief Auxiliar function used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #include "..\include\Cheb3D.hpp"
 
 Matrix& Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matrix& Cz){
