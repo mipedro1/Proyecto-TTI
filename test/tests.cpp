@@ -37,6 +37,9 @@
 #include "..\include\Geodetic.hpp"
 #include "..\include\angl.hpp"
 #include "..\include\elements.hpp"
+#include "..\include\gibbs.hpp"
+#include "..\include\hgibbs.hpp"
+#include "..\include\anglesg.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -1255,6 +1258,102 @@ int I1_Elements_01() {
     
     return 0;
 }
+int I1_Gibbs_01() {
+    
+	Matrix& y=zeros(3);
+	y(1) = 1.1;  
+	y(2) = 2.2;        
+	y(3) = 3.3; 
+	
+	Matrix& x=zeros(3);
+	x(1) = 4.5;  
+	x(2) = 3.0;        
+	x(3) = 8.9; 
+	Matrix& z=zeros(3);
+	z(1) = 4.2;  
+	z(2) = 3.4;        
+	z(3) = 5.5; 
+	
+    Matrix &r=zeros(3);
+	r(1) = 866613.247540107;  
+	r(2) = 316136.02643456;        
+	r(3) = 734361.104140948;
+    auto [v2, theta,theta1,copa, error] = gibbs(y,x,z);
+	_assert(m_equals(v2,r, 1e-5));
+	_assert( (fabs(theta-(0.302314735356022)))<1e-5);
+	_assert( (fabs(theta1-(0.237237791184903)))<1e-5);
+	_assert( (fabs(copa-(0.281268052752144)))<1e-5);
+	_assert(error == "not coplanar");
+
+
+    
+    return 0;
+}
+int I1_Hgibbs_01() {
+    
+	Matrix& y=zeros(3);
+	y(1) = 1.1;  
+	y(2) = 2.2;        
+	y(3) = 3.3; 
+	
+	Matrix& x=zeros(3);
+	x(1) = 4.5;  
+	x(2) = 3.0;        
+	x(3) = 8.9; 
+	Matrix& z=zeros(3);
+	z(1) = 4.2;  
+	z(2) = 3.4;        
+	z(3) = 5.5; 
+	
+    Matrix &r=zeros(3);
+	r(1) = -1.89824587851256e+16;  
+	r(2) = -6.92698291257744e+16;        
+	r(3) = -1.0140035076422e+17;
+    auto [v2, theta,theta1,copa, error] = hgibbs(y,x,z,58849,58850,58851);
+	
+	_assert(m_equals(v2,r, 1e+7));
+	_assert( (fabs(theta-(0.302314735356022)))<1e-5);
+	_assert( (fabs(theta1-(0.237237791184903)))<1e-5);
+	_assert( (fabs(copa-(0.281268052752144)))<1e-5);
+	_assert(error == "   angl > 1ø");
+
+
+    
+    return 0;
+}
+int I1_Anglesg_01() {
+    
+	Matrix& r=zeros(3,1);
+	r(1,1) = -330929981.389244;  
+	r(2,1) = 20147038.6804914;        
+	r(3,1) = -252843889.882699; 
+	
+	Matrix& v=zeros(3,1);
+	v(1,1) = -66.8838054225621;  
+	v(2,1) = 101.865244349731;        
+	v(3,1) = 194.336073322565; 
+	
+    Matrix &rs1=zeros(3,1);
+	rs1(1) = 7000e3;  
+	rs1(2) = 5000e3;        
+	rs1(3) = 3000e3;
+	Matrix &rs2=zeros(3,1);
+	rs2(1) = 8000e3;  
+	rs2(2) = 4000e3;        
+	rs2(3) = 2000e3;
+	Matrix &rs3=zeros(3,1);
+	rs3(1) = 6000e3;  
+	rs3(2) = 7000e3;        
+	rs3(3) = 4000e3;
+    auto [r2,v2] = anglesg(0.5,1.0,1.5,0.3,0.6,0.9,59000,59010,59020,rs1,rs2,rs3);
+	
+	_assert(m_equals(v,v2, 1e-5));
+	_assert(m_equals(r,r2, 1e-5));
+
+
+    
+    return 0;
+}
 
 int all_tests()
 {
@@ -1319,6 +1418,9 @@ int all_tests()
 	_verify(I1_Geodetic_01);
 	_verify(I1_Angl_01);
 	_verify(I1_Elements_01);
+	_verify(I1_Gibbs_01);
+	_verify(I1_Hgibbs_01);
+	_verify(I1_Anglesg_01);
 	
 	
 

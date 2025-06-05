@@ -538,5 +538,46 @@ Matrix& Matrix::assign_column(int n, Matrix& m) {
 
     return *this;
 }
+Matrix& roots( Matrix& poly) {
+    // Aseguramos que el polinomio tiene al menos un coeficiente
+    if (poly.n_column <= 0) {
+        cout << "Error: Polinomio vacío." << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    // Crear un vector para los coeficientes del polinomio
+    Matrix coef(poly.n_column); // Crear un vector fila con el mismo tamaño que poly.n_column
+
+    // Llenamos el vector con los coeficientes
+    for (int i = 1; i <= poly.n_column; ++i) {
+        coef(1, i) = poly(1, i);  // Extraemos el coeficiente
+    }
+
+    // Definimos los vectores para las raíces reales e imaginarias
+    Matrix zeror(poly.n_column);  // Raíces reales
+    Matrix zeroi(poly.n_column);  // Raíces imaginarias
+
+    // Crear estado para calcular las raíces
+    struct RPoly_State* state = real_poly_alloc(poly.n_column - 1);
+
+    // Calcular las raíces
+    int num_roots = real_poly_roots_compute(coef.data[0], poly.n_column - 1, state, zeror.data[0], zeroi.data[0]);
+
+    // Liberar el estado
+    real_poly_release(state);
+
+    // Almacenar las raíces en una nueva matriz (resultado)
+    Matrix* root_matrix = new Matrix(num_roots, 2);  // Dos columnas: parte real e imaginaria
+
+    // Llenamos la matriz de raíces con las partes reales e imaginarias
+    for (int i = 1; i <= num_roots; ++i) {
+        (*root_matrix)(i, 1) = zeror(i);  // Parte real
+        (*root_matrix)(i, 2) = zeroi(i);  // Parte imaginaria
+    }
+
+    // Devolver la matriz con las raíces
+    return *root_matrix;
+}
+
 
 

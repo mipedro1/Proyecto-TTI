@@ -23,6 +23,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <iostream>
+#include "..\include\rpoly.hpp"
 
 using namespace std;
 
@@ -203,6 +204,7 @@ public:
 	Matrix& assign_column(int n, Matrix& m);
 	
 	
+	
 	// Non-member operators
 	friend ostream& operator << (ostream &o,Matrix&m);
 	
@@ -258,6 +260,17 @@ Matrix& zeros(int n);
  */
 //-----------------------------------------------------------------------------------------------
 double norm(Matrix& m);
+
+//-----------------------------------------------------------------------------------------------
+// roots( Matrix& poly)
+//-----------------------------------------------------------------------------------------------
+/**
+ *	@brief this function calculates the roots of a polynomial represented by the matrix coefficients
+ * 
+ *      @return Result. A matrix containing the roots of the polynomial.
+ */
+//-----------------------------------------------------------------------------------------------
+Matrix& roots( Matrix& poly);
 
 
 #endif

@@ -73,7 +73,7 @@ void GEOS3(int f){
 	
 	FILE *fid = fopen("../data/GEOS3.txt","r");
 	if(fid==NULL){
-		printf("Fail open DE430Coeff.txt file\n");
+		printf("Fail open GEOS3.txt file\n");
 		exit(EXIT_FAILURE);
 	}
 	
