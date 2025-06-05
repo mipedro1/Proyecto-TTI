@@ -1,0 +1,14 @@
+<map id="DEInteg" name="DEInteg">
+<area shape="rect" id="Node000001" title="Chebyshev approximation of 3&#45;dimensional vectors." alt="" coords="5,81,75,108"/>
+<area shape="rect" id="Node000002" href="$class_matrix.html#a9b4a957584baec86c2f482eab55986d3" title="this function returns a column from the matrix" alt="" coords="123,5,277,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="59,79,121,42,136,36,138,40,124,46,62,83"/>
+<area shape="rect" id="Node000004" href="$sign___8cpp.html#acaf6f309594b8f14ca0ec7750d41738f" title="returns absolute value of a with sign of b" alt="" coords="174,56,226,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="75,87,158,73,159,78,75,92"/>
+<area shape="rect" id="Node000005" href="$class_matrix.html#ad609fedfd61e93679803bb114e544569" title="this function calculates the transpose of a matrix" alt="" coords="139,107,261,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="75,97,124,105,123,111,75,103"/>
+<area shape="rect" id="Node000006" href="$matrix_8cpp.html#a56d60ea1f08402246a7cfd477d69a618" title="this function returns a matrix with all of its elements set to 0" alt="" coords="173,157,226,184"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="62,106,124,143,159,157,157,162,121,148,59,111"/>
+<area shape="rect" id="Node000003" href="$class_matrix.html#a2dba13c45127354c9f75ef576f49269b" title="this function creates a matrix" alt="" coords="325,56,426,83"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="250,30,313,49,311,54,248,35"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="248,103,311,85,313,90,250,109"/>
+</map>

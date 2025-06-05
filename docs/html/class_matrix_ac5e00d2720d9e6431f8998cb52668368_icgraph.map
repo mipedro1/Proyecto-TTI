@@ -1,0 +1,21 @@
+<map id="Matrix::dot" name="Matrix::dot">
+<area shape="rect" id="Node000001" title="this function calculates the dot product of two matrices" alt="" coords="355,132,439,159"/>
+<area shape="rect" id="Node000002" href="$angl_8cpp.html#af206beb61be4f584306f6fefed44eb90" title="this function returns theta, an angle between the two vectors" alt="" coords="252,56,297,83"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="360,126,296,85,299,81,363,121"/>
+<area shape="rect" id="Node000003" href="$anglesg_8cpp.html#aa28e5c4934a42b8bf68c5e674cf7a7ef" title="this function solves the problem of orbit determination using three optical sightings." alt="" coords="5,107,72,133"/>
+<area shape="poly" id="edge7_Node000001_Node000003" title=" " alt="" coords="340,153,237,156,178,154,119,148,72,135,73,130,120,143,178,149,237,151,339,148"/>
+<area shape="rect" id="Node000004" href="$gibbs_8cpp.html#aad5cdb6b10f9baf6ef1f3c36185da8e0" title="this function performs the gibbs method of orbit determination. this method determines the velocity a..." alt="" coords="131,5,183,32"/>
+<area shape="poly" id="edge11_Node000001_Node000004" title=" " alt="" coords="378,121,348,81,328,62,306,46,275,33,242,25,183,21,184,15,243,20,277,28,309,42,332,58,352,77,382,117"/>
+<area shape="rect" id="Node000005" href="$hgibbs_8cpp.html#abfce174ff6885367e3aca655642c2dd7" title="this function implements the herrick&#45;gibbs approximation for orbit determination, and finds the middl..." alt="" coords="127,107,186,133"/>
+<area shape="poly" id="edge12_Node000001_Node000005" title=" " alt="" coords="340,142,187,126,187,120,340,137"/>
+<area shape="rect" id="Node000006" href="$_az_el_pa_8cpp.html#ae89a6c135135b96ec7057c45dced4159" title="Computes azimuth, elevation and partials from local tangent coordinates." alt="" coords="242,208,307,235"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="363,170,299,210,296,205,360,165"/>
+<area shape="rect" id="Node000007" href="$elements_8cpp.html#a5dd6d5680c9b5aafae7e21082e0ab75a" title="Computes the osculating Keplerian elements from the satellite state vector for elliptic orbits." alt="" coords="120,233,194,260"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="383,174,353,215,333,234,308,249,280,258,249,261,194,257,194,252,249,256,278,253,306,244,329,230,349,211,379,171"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="237,76,120,97,73,111,71,106,119,92,236,71"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="237,56,182,32,184,27,239,51"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="239,87,188,110,186,105,237,83"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="130,44,57,108,54,104,127,40"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="112,123,72,123,72,117,112,117"/>
+<area shape="poly" id="edge10_Node000007_Node000003" title=" " alt="" coords="131,224,51,136,54,132,135,220"/>
+</map>

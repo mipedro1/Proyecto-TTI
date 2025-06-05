@@ -1,0 +1,15 @@
+<map id="elements" name="elements">
+<area shape="rect" id="Node000001" title="Computes the osculating Keplerian elements from the satellite state vector for elliptic orbits." alt="" coords="5,81,80,108"/>
+<area shape="rect" id="Node000002" href="$class_matrix.html#a1887b75cd8de42c5c2e322e3bbd498b0" title="this function calculates the cross product of two matrices" alt="" coords="153,5,250,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="63,78,126,42,140,36,143,40,129,46,66,83"/>
+<area shape="rect" id="Node000004" href="$class_matrix.html#ac5e00d2720d9e6431f8998cb52668368" title="this function calculates the dot product of two matrices" alt="" coords="160,56,244,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="80,86,144,76,145,81,81,91"/>
+<area shape="rect" id="Node000005" href="$class_matrix.html#a37787f393e2047c33a67c3d4f26ee931" title="this function returns a vector from the matrix" alt="" coords="128,107,276,133"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="81,98,113,103,112,108,80,103"/>
+<area shape="rect" id="Node000006" href="$matrix_8cpp.html#a907c9c6f53fc52d17e86b507b156536f" title="this function returns the norm of a matrix" alt="" coords="177,157,227,184"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="66,106,129,143,163,156,161,161,127,148,63,111"/>
+<area shape="rect" id="Node000003" href="$class_matrix.html#a2dba13c45127354c9f75ef576f49269b" title="this function creates a matrix" alt="" coords="324,56,425,83"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="251,30,313,49,311,54,249,35"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="244,67,309,67,309,72,244,72"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="249,103,311,85,313,90,251,109"/>
+</map>

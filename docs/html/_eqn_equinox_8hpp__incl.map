@@ -1,0 +1,42 @@
+<map id="C:/Users/mipedro/Documents/GitHub/Proyecto&#45;TTI/include/EqnEquinox.hpp" name="C:/Users/mipedro/Documents/GitHub/Proyecto&#45;TTI/include/EqnEquinox.hpp">
+<area shape="rect" id="Node000001" title="This header file contains an auxiliar function used by EKF_GEOS3." alt="" coords="464,5,659,64"/>
+<area shape="rect" id="Node000002" href="$matrix_8hpp.html" title="This class represents a mathematical matrix and provides various matrix operations." alt="" coords="131,261,270,288"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="464,42,383,55,341,65,298,80,257,99,219,123,186,153,160,188,156,203,159,218,178,248,173,251,154,220,151,203,155,185,182,149,216,119,254,94,296,75,339,60,382,49,463,37"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="468,336,525,363"/>
+<area shape="poly" id="edge26_Node000001_Node000005" title=" " alt="" coords="556,65,524,187,502,321,497,320,519,186,551,63"/>
+<area shape="rect" id="Node000008" href="$_s_a_t___const_8hpp.html" title="This header file contains auxiliar data used by EKF_GEOS3." alt="" coords="664,261,835,288"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="626,62,663,84,701,112,735,146,761,186,766,201,767,217,763,247,757,246,762,217,761,202,757,188,731,149,697,116,660,88,623,67"/>
+<area shape="rect" id="Node000009" href="$global_8hpp.html" title="This header file contains auxiliar data used by EKF_GEOS3." alt="" coords="305,112,442,139"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="502,67,415,107,413,103,499,62"/>
+<area shape="rect" id="Node000012" href="$_mean_obliquity_8hpp.html" title="This header file contains an auxiliar function used by EKF_GEOS3." alt="" coords="534,187,720,213"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="576,63,619,171,614,173,571,65"/>
+<area shape="rect" id="Node000013" href="$_nut_angles_8hpp.html" title="This header file contains an auxiliar function used by EKF_GEOS3." alt="" coords="846,187,1010,213"/>
+<area shape="poly" id="edge21_Node000001_Node000013" title=" " alt="" coords="660,51,744,74,787,90,828,110,873,140,908,173,905,177,869,145,826,114,785,95,742,79,659,56"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="339,336,395,363"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="230,286,326,327,323,332,228,291"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,336,65,363"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="173,291,79,332,77,327,170,286"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="253,286,453,335,452,340,252,291"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="89,336,160,363"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="189,290,150,327,146,323,185,287"/>
+<area shape="rect" id="Node000007" href="$rpoly_8hpp.html" title="This header file contains functions to find roots." alt="" coords="184,336,315,363"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="211,287,235,322,230,325,207,290"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="706,291,541,338,539,333,705,286"/>
+<area shape="poly" id="edge10_Node000009_Node000002" title=" " alt="" coords="305,141,224,160,192,174,172,188,166,202,168,217,183,248,178,250,162,219,161,201,168,185,189,169,223,155,304,135"/>
+<area shape="poly" id="edge15_Node000009_Node000005" title=" " alt="" coords="375,139,376,173,385,212,403,245,426,276,472,324,468,327,421,279,399,248,381,214,371,174,370,139"/>
+<area shape="poly" id="edge14_Node000009_Node000008" title=" " alt="" coords="443,126,522,132,608,142,684,159,713,171,734,185,744,198,750,214,754,246,749,247,745,216,740,201,730,189,711,176,682,164,607,148,521,137,443,132"/>
+<area shape="rect" id="Node000010" href="$_mjday_8hpp.html" title="This header file contains an auxiliar function used by EKF_GEOS3." alt="" coords="182,187,320,213"/>
+<area shape="poly" id="edge11_Node000009_Node000010" title=" " alt="" coords="354,142,287,181,284,176,351,137"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="395,187,459,213"/>
+<area shape="poly" id="edge16_Node000009_Node000011" title=" " alt="" coords="385,138,411,173,407,176,381,141"/>
+<area shape="poly" id="edge12_Node000010_Node000002" title=" " alt="" coords="244,215,220,250,215,247,240,212"/>
+<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="263,212,295,248,340,286,398,315,454,334,452,339,396,320,338,290,291,252,259,215"/>
+<area shape="poly" id="edge18_Node000012_Node000002" title=" " alt="" coords="553,217,286,262,285,256,552,211"/>
+<area shape="poly" id="edge19_Node000012_Node000005" title=" " alt="" coords="618,216,519,326,515,323,614,212"/>
+<area shape="poly" id="edge20_Node000012_Node000008" title=" " alt="" coords="650,212,716,251,714,255,647,216"/>
+<area shape="poly" id="edge22_Node000013_Node000002" title=" " alt="" coords="846,212,286,268,286,262,845,207"/>
+<area shape="poly" id="edge24_Node000013_Node000005" title=" " alt="" coords="923,215,894,253,873,274,848,290,809,309,767,323,683,341,604,350,541,352,540,347,603,345,682,336,766,318,807,304,846,286,869,269,890,250,918,212"/>
+<area shape="poly" id="edge23_Node000013_Node000008" title=" " alt="" coords="898,216,796,258,794,253,896,211"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="910,261,960,288"/>
+<area shape="poly" id="edge25_Node000013_Node000014" title=" " alt="" coords="932,214,935,245,930,246,927,214"/>
+</map>

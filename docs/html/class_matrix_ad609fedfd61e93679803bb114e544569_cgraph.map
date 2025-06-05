@@ -1,0 +1,5 @@
+<map id="Matrix::transpose" name="Matrix::transpose">
+<area shape="rect" id="Node000001" title="this function calculates the transpose of a matrix" alt="" coords="5,5,128,32"/>
+<area shape="rect" id="Node000002" href="$class_matrix.html#a2dba13c45127354c9f75ef576f49269b" title="this function creates a matrix" alt="" coords="176,5,277,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="128,16,160,16,160,21,128,21"/>
+</map>

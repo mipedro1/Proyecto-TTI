@@ -1,0 +1,5 @@
+<map id="Matrix::cross" name="Matrix::cross">
+<area shape="rect" id="Node000001" title="this function calculates the cross product of two matrices" alt="" coords="5,5,103,32"/>
+<area shape="rect" id="Node000002" href="$class_matrix.html#a2dba13c45127354c9f75ef576f49269b" title="this function creates a matrix" alt="" coords="151,5,252,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,16,135,16,135,21,103,21"/>
+</map>

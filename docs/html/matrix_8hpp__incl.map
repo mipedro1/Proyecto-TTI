@@ -1,0 +1,13 @@
+<map id="C:/Users/mipedro/Documents/GitHub/Proyecto&#45;TTI/include/matrix.hpp" name="C:/Users/mipedro/Documents/GitHub/Proyecto&#45;TTI/include/matrix.hpp">
+<area shape="rect" id="Node000001" title="This class represents a mathematical matrix and provides various matrix operations." alt="" coords="100,5,295,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,112,62,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="146,67,71,107,69,102,143,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="85,112,144,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,66,139,102,135,99,169,63"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="169,112,226,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="200,64,200,96,195,96,195,64"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="250,112,321,139"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="228,62,264,99,260,103,224,66"/>
+<area shape="rect" id="Node000006" href="$rpoly_8hpp.html" title="This header file contains functions to find roots." alt="" coords="346,112,476,139"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="268,62,367,103,365,108,266,67"/>
+</map>

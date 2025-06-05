@@ -1,0 +1,15 @@
+<map id="sign_" name="sign_">
+<area shape="rect" id="Node000001" title="returns absolute value of a with sign of b" alt="" coords="344,46,397,72"/>
+<area shape="rect" id="Node000002" href="$angl_8cpp.html#af206beb61be4f584306f6fefed44eb90" title="this function returns theta, an angle between the two vectors" alt="" coords="239,20,284,47"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="328,52,284,41,285,36,330,47"/>
+<area shape="rect" id="Node000006" href="$_d_e_integ_8cpp.html#a7f2e4827e1acc742bb1b4fc9ad6b156a" title="Chebyshev approximation of 3&#45;dimensional vectors." alt="" coords="227,71,296,98"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="330,71,297,79,296,74,329,66"/>
+<area shape="rect" id="Node000003" href="$anglesg_8cpp.html#aa28e5c4934a42b8bf68c5e674cf7a7ef" title="this function solves the problem of orbit determination using three optical sightings." alt="" coords="5,20,72,47"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="224,23,179,11,149,8,120,11,73,23,72,18,119,6,149,3,179,6,225,17"/>
+<area shape="rect" id="Node000004" href="$gibbs_8cpp.html#aad5cdb6b10f9baf6ef1f3c36185da8e0" title="this function performs the gibbs method of orbit determination. this method determines the velocity a..." alt="" coords="123,20,176,47"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="223,36,176,36,176,31,223,31"/>
+<area shape="rect" id="Node000005" href="$hgibbs_8cpp.html#abfce174ff6885367e3aca655642c2dd7" title="this function implements the herrick&#45;gibbs approximation for orbit determination, and finds the middl..." alt="" coords="120,71,179,98"/>
+<area shape="poly" id="edge5_Node000002_Node000005" title=" " alt="" coords="226,52,180,74,178,69,224,48"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="108,36,72,36,72,31,108,31"/>
+<area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="104,67,69,50,71,45,107,62"/>
+</map>

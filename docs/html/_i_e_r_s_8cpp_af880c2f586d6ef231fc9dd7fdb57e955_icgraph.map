@@ -1,0 +1,9 @@
+<map id="IERS" name="IERS">
+<area shape="rect" id="Node000001" title="Management of IERS time and polar motion data." alt="" coords="120,56,173,83"/>
+<area shape="rect" id="Node000002" href="$_accel_8cpp.html#a28040ec3672b4e1805218ad1cd43bfa0" title="Computes the acceleration of an Earth orbiting satellite due to." alt="" coords="11,5,66,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="104,53,65,34,67,29,107,48"/>
+<area shape="rect" id="Node000003" href="$anglesg_8cpp.html#aa28e5c4934a42b8bf68c5e674cf7a7ef" title="this function solves the problem of orbit determination using three optical sightings." alt="" coords="5,56,72,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="104,72,72,72,72,67,104,67"/>
+<area shape="rect" id="Node000004" href="$_var_eqn_8cpp.html#a6e153d0ae05034cb5b346189ebb847d3" title="Computes the variational equations, i.e. the derivative of the state vector and the state transition ..." alt="" coords="7,107,70,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="107,91,70,108,68,104,104,86"/>
+</map>

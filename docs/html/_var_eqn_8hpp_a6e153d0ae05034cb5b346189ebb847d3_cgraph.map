@@ -1,0 +1,71 @@
+<map id="VarEqn" name="VarEqn">
+<area shape="rect" id="Node000001" title="Computes the variational equations, i.e. the derivative of the state vector and the state transition ..." alt="" coords="5,309,69,336"/>
+<area shape="rect" id="Node000002" href="$_accel_harmonic_8cpp.html#aa1b4c4eec7dc53fa60ce465c27f9d47a" title="Computes the acceleration due to the harmonic gravity field of the central body." alt="" coords="335,259,445,285"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="68,316,319,279,320,285,69,321"/>
+<area shape="rect" id="Node000004" href="$matrix_8cpp.html#a56d60ea1f08402246a7cfd477d69a618" title="this function returns a matrix with all of its elements set to 0" alt="" coords="711,385,764,412"/>
+<area shape="poly" id="edge43_Node000001_Node000004" title=" " alt="" coords="70,323,696,392,695,397,69,329"/>
+<area shape="rect" id="Node000006" href="$class_matrix.html#ad609fedfd61e93679803bb114e544569" title="this function calculates the transpose of a matrix" alt="" coords="515,157,638,184"/>
+<area shape="poly" id="edge42_Node000001_Node000006" title=" " alt="" coords="41,308,66,256,88,228,115,206,163,183,213,167,265,156,317,150,417,148,501,155,500,161,417,154,318,155,266,161,214,172,165,188,118,210,92,232,71,259,46,310"/>
+<area shape="rect" id="Node000008" href="$class_matrix.html#a3d167751bf71792ab166cca2032c61b4" title="this function assigns a column to the matrix" alt="" coords="314,107,466,133"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="38,308,44,275,58,231,81,187,96,167,115,150,158,127,205,113,253,107,298,107,298,112,253,113,206,118,160,132,118,154,100,170,85,190,63,233,49,276,43,309"/>
+<area shape="rect" id="Node000009" href="$class_matrix.html#a37787f393e2047c33a67c3d4f26ee931" title="this function returns a vector from the matrix" alt="" coords="117,5,265,32"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="35,309,37,260,47,189,57,150,71,111,90,75,115,42,118,39,121,43,119,46,94,77,76,113,62,151,52,190,42,260,41,309"/>
+<area shape="rect" id="Node000010" href="$_g___accel_harmonic_8cpp.html#a8c1900d3aa2aceb61387b84a92e17818" title="Computes the gradient of the Earth&#39;s harmonic gravity field." alt="" coords="127,220,254,247"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="61,306,152,253,154,257,63,311"/>
+<area shape="rect" id="Node000011" href="$_g_h_a_matrix_8cpp.html#a49218ae38846c1175342d13a65d41f4d" title="Transformation from true equator and equinox to Earth equator and Greenwich meridian system." alt="" coords="148,563,234,589"/>
+<area shape="poly" id="edge15_Node000001_Node000011" title=" " alt="" coords="42,336,48,376,60,430,83,490,99,517,119,542,136,555,132,560,115,546,95,520,78,492,55,432,42,377,37,337"/>
+<area shape="rect" id="Node000019" href="$_i_e_r_s_8cpp.html#af880c2f586d6ef231fc9dd7fdb57e955" title="Management of IERS time and polar motion data." alt="" coords="164,56,218,83"/>
+<area shape="poly" id="edge25_Node000001_Node000019" title=" " alt="" coords="37,308,42,269,55,213,78,153,95,125,115,99,130,87,148,78,150,83,133,91,119,103,99,128,83,156,60,215,48,270,42,309"/>
+<area shape="rect" id="Node000021" href="$_nut_matrix_8cpp.html#ac7fb7e48f2d2d4fd63ac42e17e44ff23" title="Transformation from mean to true equator and equinox." alt="" coords="351,512,429,539"/>
+<area shape="poly" id="edge28_Node000001_Node000021" title=" " alt="" coords="43,336,51,366,65,405,87,445,101,463,118,478,143,493,170,506,228,521,285,527,335,527,335,533,285,532,227,526,169,511,141,498,115,482,98,466,83,448,60,407,46,367,38,337"/>
+<area shape="rect" id="Node000023" href="$_pole_matrix_8cpp.html#aa20f72601d5ff91f277b999d15b7d6c9" title="Transformation from pseudo Earth&#45;fixed to Earth&#45;fixed coordinates for a given date." alt="" coords="348,461,432,488"/>
+<area shape="poly" id="edge34_Node000001_Node000023" title=" " alt="" coords="46,335,73,382,93,408,118,428,171,453,228,467,284,474,333,475,333,480,284,479,227,472,169,458,115,433,89,412,68,385,42,338"/>
+<area shape="rect" id="Node000025" href="$_prec_matrix_8cpp.html#a95bbb47a6bcd9ecaf7b5bc46f88dc7d1" title="Precession transformation of equatorial coordinates." alt="" coords="348,411,432,437"/>
+<area shape="poly" id="edge38_Node000001_Node000025" title=" " alt="" coords="51,335,79,364,118,390,172,408,230,419,285,424,333,424,332,430,284,429,229,424,171,413,115,394,76,368,47,338"/>
+<area shape="rect" id="Node000026" href="$timediff_8cpp.html#a0772112289293a570d2edb0667dbb3a9" title="Time differences." alt="" coords="159,613,222,640"/>
+<area shape="poly" id="edge41_Node000001_Node000026" title=" " alt="" coords="41,336,42,385,52,456,62,494,76,532,94,568,119,599,131,609,145,616,143,621,128,614,115,603,90,571,71,534,57,496,47,457,37,386,35,336"/>
+<area shape="rect" id="Node000003" href="$_legendre_8cpp.html#a55ce532de3c95506384990ae714dd99d" title="Computes the Legendre polynomials and their derivatives." alt="" coords="539,309,614,336"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="443,283,525,306,524,311,441,289"/>
+<area shape="rect" id="Node000005" href="$matrix_8cpp.html#a907c9c6f53fc52d17e86b507b156536f" title="this function returns the norm of a matrix" alt="" coords="551,259,602,285"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="446,269,536,269,536,275,446,275"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="415,256,536,189,538,194,418,260"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="608,334,698,377,696,382,606,339"/>
+<area shape="rect" id="Node000007" href="$class_matrix.html#a2dba13c45127354c9f75ef576f49269b" title="this function creates a matrix" alt="" coords="687,81,788,108"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="606,154,693,113,695,117,608,159"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="467,112,671,97,672,102,467,117"/>
+<area shape="poly" id="edge10_Node000009_Node000007" title=" " alt="" coords="266,19,437,31,538,44,638,61,684,73,682,79,637,67,537,49,436,37,265,24"/>
+<area shape="poly" id="edge12_Node000010_Node000002" title=" " alt="" coords="255,243,320,256,319,261,254,248"/>
+<area shape="poly" id="edge14_Node000010_Node000004" title=" " alt="" coords="248,217,329,203,430,197,484,200,538,208,590,222,639,244,672,271,698,304,717,339,730,370,725,372,712,341,693,307,668,274,636,249,588,227,536,213,483,205,430,202,330,209,249,222"/>
+<area shape="poly" id="edge13_Node000010_Node000008" title=" " alt="" coords="215,217,351,139,353,143,218,222"/>
+<area shape="rect" id="Node000012" href="$gast_8cpp.html#a4eb2d09c87615520077aec1005b8e0ad" title="Greenwich Apparent Sidereal Time." alt="" coords="367,664,413,691"/>
+<area shape="poly" id="edge16_Node000011_Node000012" title=" " alt="" coords="235,586,266,599,315,626,358,653,356,657,313,630,264,604,233,591"/>
+<area shape="rect" id="Node000018" href="$_r__z_8cpp.html#a4f688959a9ab144bf27d272e54bf7258" title="returns rotation matrix" alt="" coords="554,512,599,539"/>
+<area shape="poly" id="edge23_Node000011_Node000018" title=" " alt="" coords="234,571,340,563,467,548,538,533,539,538,468,553,341,569,235,577"/>
+<area shape="rect" id="Node000013" href="$_eqn_equinox_8cpp.html#a1178917cf376ea4f15cea33c59028635" title="Computation of the equation of the equinoxes." alt="" coords="531,664,622,691"/>
+<area shape="poly" id="edge17_Node000012_Node000013" title=" " alt="" coords="414,675,516,675,516,680,414,680"/>
+<area shape="rect" id="Node000016" href="$gmst_8cpp.html#a22a9ee5ea799a7511f4b5b1939c9de76" title="Greenwich Mean Sidereal Time." alt="" coords="551,739,602,765"/>
+<area shape="poly" id="edge20_Node000012_Node000016" title=" " alt="" coords="415,684,538,734,536,739,413,689"/>
+<area shape="rect" id="Node000014" href="$_mean_obliquity_8cpp.html#a11f057ac4e8a0c5a7958f77379e30d40" title="Computes the mean obliquity of the ecliptic." alt="" coords="686,639,790,665"/>
+<area shape="poly" id="edge18_Node000013_Node000014" title=" " alt="" coords="622,668,670,660,671,665,623,673"/>
+<area shape="rect" id="Node000015" href="$_nut_angles_8cpp.html#a8028f5f2ac1a0a2126d8edf6a5ed80c6" title="Nutation in longitude and obliquity." alt="" coords="697,563,779,589"/>
+<area shape="poly" id="edge19_Node000013_Node000015" title=" " alt="" coords="598,661,701,596,703,600,601,666"/>
+<area shape="poly" id="edge22_Node000016_Node000016" title=" " alt="" coords="549,739,544,730,547,720,558,714,577,712,596,715,606,721,604,726,594,720,576,717,560,719,551,724,549,729,553,737"/>
+<area shape="rect" id="Node000017" href="$_frac_8cpp.html#a92f2f0f91c99cd6bec1a0e9a3b6443fc" title="Fractional part of a number (y=x&#45;[x])" alt="" coords="714,739,762,765"/>
+<area shape="poly" id="edge21_Node000016_Node000017" title=" " alt="" coords="602,749,699,749,699,755,602,755"/>
+<area shape="poly" id="edge24_Node000018_Node000004" title=" " alt="" coords="598,516,636,498,680,461,714,423,718,426,684,465,639,502,601,521"/>
+<area shape="rect" id="Node000020" href="$class_matrix.html#a9b4a957584baec86c2f482eab55986d3" title="this function returns a column from the matrix" alt="" coords="313,56,467,83"/>
+<area shape="poly" id="edge26_Node000019_Node000020" title=" " alt="" coords="218,67,297,67,297,72,218,72"/>
+<area shape="poly" id="edge27_Node000020_Node000007" title=" " alt="" coords="468,72,672,87,671,93,467,78"/>
+<area shape="poly" id="edge29_Node000021_Node000014" title=" " alt="" coords="429,537,516,569,684,630,682,635,514,575,427,542"/>
+<area shape="poly" id="edge30_Node000021_Node000015" title=" " alt="" coords="430,531,516,548,682,568,681,574,515,553,429,537"/>
+<area shape="poly" id="edge33_Node000021_Node000018" title=" " alt="" coords="430,523,538,523,538,528,430,528"/>
+<area shape="rect" id="Node000022" href="$_r__x_8cpp.html#ab96741dfe3b3590793f2b318ceed5f53" title="returns rotation matrix" alt="" coords="554,461,599,488"/>
+<area shape="poly" id="edge31_Node000021_Node000022" title=" " alt="" coords="429,512,538,482,539,487,430,517"/>
+<area shape="poly" id="edge32_Node000022_Node000004" title=" " alt="" coords="599,463,637,447,696,417,698,422,639,452,601,468"/>
+<area shape="poly" id="edge35_Node000023_Node000022" title=" " alt="" coords="432,472,538,472,538,477,432,477"/>
+<area shape="rect" id="Node000024" href="$_r__y_8cpp.html#a25114557991f92fd6b027118c591a98f" title="returns rotation matrix" alt="" coords="554,411,599,437"/>
+<area shape="poly" id="edge36_Node000023_Node000024" title=" " alt="" coords="432,461,538,431,539,437,433,466"/>
+<area shape="poly" id="edge37_Node000024_Node000004" title=" " alt="" coords="599,418,695,403,696,408,600,423"/>
+<area shape="poly" id="edge40_Node000025_Node000018" title=" " alt="" coords="434,431,469,447,484,460,494,473,503,485,517,498,541,511,538,515,514,502,499,489,489,476,480,464,466,452,432,436"/>
+<area shape="poly" id="edge39_Node000025_Node000024" title=" " alt="" coords="433,421,538,421,538,427,433,427"/>
+</map>

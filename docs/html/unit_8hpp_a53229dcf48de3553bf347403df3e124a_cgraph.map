@@ -1,0 +1,7 @@
+<map id="unit" name="unit">
+<area shape="rect" id="Node000001" title="this function calculates a unit vector given the original vector. if a zero vector is input,..." alt="" coords="5,31,48,57"/>
+<area shape="rect" id="Node000002" href="$matrix_8cpp.html#a907c9c6f53fc52d17e86b507b156536f" title="this function returns the norm of a matrix" alt="" coords="97,5,148,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="47,36,81,27,83,32,49,41"/>
+<area shape="rect" id="Node000003" href="$matrix_8cpp.html#a56d60ea1f08402246a7cfd477d69a618" title="this function returns a matrix with all of its elements set to 0" alt="" coords="96,56,149,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="49,47,81,56,80,61,47,52"/>
+</map>

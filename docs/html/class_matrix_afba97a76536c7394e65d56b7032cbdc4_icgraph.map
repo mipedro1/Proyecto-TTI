@@ -1,0 +1,7 @@
+<map id="Matrix::inv" name="Matrix::inv">
+<area shape="rect" id="Node000001" title="this function calculates the inverse of a matrix" alt="" coords="149,31,231,57"/>
+<area shape="rect" id="Node000002" href="$anglesg_8cpp.html#aa28e5c4934a42b8bf68c5e674cf7a7ef" title="this function solves the problem of orbit determination using three optical sightings." alt="" coords="20,5,86,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,36,86,27,87,22,134,31"/>
+<area shape="rect" id="Node000003" href="$_meas_update_8cpp.html#ae12754392beb1fd53d392978b396266f" title="Performs a measurement update step of a Kalman filter." alt="" coords="5,56,101,83"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="134,57,102,63,101,58,133,52"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="R_y" name="R_y">
+<area shape="rect" id="Node000001" title="returns rotation matrix" alt="" coords="252,56,297,83"/>
+<area shape="rect" id="Node000002" href="$_l_t_c_8cpp.html#a27b89059a0c4bc52a9192df16ead3359" title="Transformation from Greenwich meridian system to local tangent coordinates." alt="" coords="139,5,184,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="237,55,184,31,186,26,239,51"/>
+<area shape="rect" id="Node000004" href="$_pole_matrix_8cpp.html#aa20f72601d5ff91f277b999d15b7d6c9" title="Transformation from pseudo Earth&#45;fixed to Earth&#45;fixed coordinates for a given date." alt="" coords="120,107,204,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="239,88,194,109,192,104,237,83"/>
+<area shape="rect" id="Node000007" href="$_prec_matrix_8cpp.html#a95bbb47a6bcd9ecaf7b5bc46f88dc7d1" title="Precession transformation of equatorial coordinates." alt="" coords="120,56,204,83"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="236,72,205,72,205,67,236,67"/>
+<area shape="rect" id="Node000003" href="$anglesg_8cpp.html#aa28e5c4934a42b8bf68c5e674cf7a7ef" title="this function solves the problem of orbit determination using three optical sightings." alt="" coords="5,5,72,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="124,21,72,21,72,16,124,16"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="122,100,118,97,93,72,70,46,56,34,59,30,74,42,97,68,121,93,125,96"/>
+<area shape="rect" id="Node000005" href="$_accel_8cpp.html#a28040ec3672b4e1805218ad1cd43bfa0" title="Computes the acceleration of an Earth orbiting satellite due to." alt="" coords="11,107,66,133"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="104,123,66,123,66,117,104,117"/>
+<area shape="rect" id="Node000006" href="$_var_eqn_8cpp.html#a6e153d0ae05034cb5b346189ebb847d3" title="Computes the variational equations, i.e. the derivative of the state vector and the state transition ..." alt="" coords="7,56,70,83"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="113,103,70,85,72,80,115,98"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="112,52,71,35,73,30,115,47"/>
+<area shape="poly" id="edge8_Node000007_Node000005" title=" " alt="" coords="115,91,67,111,65,106,113,86"/>
+<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="104,72,71,72,71,67,104,67"/>
+</map>

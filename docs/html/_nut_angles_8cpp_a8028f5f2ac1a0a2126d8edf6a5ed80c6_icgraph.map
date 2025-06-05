@@ -1,0 +1,20 @@
+<map id="NutAngles" name="NutAngles">
+<area shape="rect" id="Node000001" title="Nutation in longitude and obliquity." alt="" coords="488,81,570,108"/>
+<area shape="rect" id="Node000002" href="$_eqn_equinox_8cpp.html#a1178917cf376ea4f15cea33c59028635" title="Computation of the equation of the equinoxes." alt="" coords="348,56,440,83"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="472,87,440,81,441,75,473,81"/>
+<area shape="rect" id="Node000008" href="$_nut_matrix_8cpp.html#ac7fb7e48f2d2d4fd63ac42e17e44ff23" title="Transformation from mean to true equator and equinox." alt="" coords="124,107,202,133"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="472,101,203,120,202,115,472,96"/>
+<area shape="rect" id="Node000003" href="$gast_8cpp.html#a4eb2d09c87615520077aec1005b8e0ad" title="Greenwich Apparent Sidereal Time." alt="" coords="254,56,300,83"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="333,72,301,72,301,67,333,67"/>
+<area shape="rect" id="Node000004" href="$_g_h_a_matrix_8cpp.html#a49218ae38846c1175342d13a65d41f4d" title="Transformation from true equator and equinox to Earth equator and Greenwich meridian system." alt="" coords="120,56,206,83"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="239,72,207,72,207,67,239,67"/>
+<area shape="rect" id="Node000005" href="$_accel_8cpp.html#a28040ec3672b4e1805218ad1cd43bfa0" title="Computes the acceleration of an Earth orbiting satellite due to." alt="" coords="11,5,66,32"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="113,52,65,32,67,27,115,47"/>
+<area shape="rect" id="Node000006" href="$anglesg_8cpp.html#aa28e5c4934a42b8bf68c5e674cf7a7ef" title="this function solves the problem of orbit determination using three optical sightings." alt="" coords="5,56,72,83"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="104,72,72,72,72,67,104,67"/>
+<area shape="rect" id="Node000007" href="$_var_eqn_8cpp.html#a6e153d0ae05034cb5b346189ebb847d3" title="Computes the variational equations, i.e. the derivative of the state vector and the state transition ..." alt="" coords="7,107,70,133"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="115,92,72,110,70,105,113,87"/>
+<area shape="poly" id="edge8_Node000008_Node000005" title=" " alt="" coords="122,100,118,97,93,72,70,46,56,34,59,30,74,42,97,68,121,93,125,96"/>
+<area shape="poly" id="edge9_Node000008_Node000006" title=" " alt="" coords="113,103,71,85,73,80,115,98"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="108,123,71,123,71,117,108,117"/>
+</map>
