@@ -1,44 +1,42 @@
 // $Header$
 //--------------------------------------------------------------------------------
-// Cheb3D
+// unit
 //--------------------------------------------------------------------------------
 // Proyecto-TTI
 //
 // Copyright (c) 2020, Meysam Mahooti
 //
-// Created: 2025/06/04
+// Created: 2025/06/05
 //
-/** @file Cheb3D.hpp
+/** @file unit.hpp
  *  @brief This header file contains an auxiliar function used by EKF_GEOS3
  *
  *	@author Miguel de Pedro Olagaray
  *	@bug No knows bugs.
  */
 //--------------------------------------------------------------------------------
-#ifndef _Cheb3D_
-#define _Cheb3D_
+#ifndef _Unit_
+#define _Unit_
+
 
 #include "..\include\matrix.hpp"
 #include <cmath>
+#include <tuple>
 
 
 //-----------------------------------------------------------------------------------------------
-// Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matrix& Cz)
+// unit(Matrix& vec)
 //-----------------------------------------------------------------------------------------------
 /**
- *	@brief Chebyshev approximation of 3-dimensional vectors
+ *	@brief this function calculates a unit vector given the original vector. if a
+ *	       zero vector is input, the vector is set to zero.
  *
- *	@param [in] N       Number of coefficients
- *	@param [in] Ta      Begin interval
- *	@param [in] Tb      End interval
- *	@param [in] Cx      Coefficients of Chebyshev polyomial (x-coordinate)
- *	@param [in] Cy      Coefficients of Chebyshev polyomial (y-coordinate)
- *	@param [in] Cz      Coefficients of Chebyshev polyomial (z-coordinate)
+ *	@param [in] vec         - vector
  *
- *	@return Matrix& ChebApp   Chebyshev approximation of 3-dimensional vectors
+ *	@return Matrix& outvec      - unit vector
  *
  */
 //-----------------------------------------------------------------------------------------------
-Matrix& Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matrix& Cz);
+Matrix& unit(Matrix& vec);
 
 #endif

@@ -1,44 +1,47 @@
 // $Header$
 //--------------------------------------------------------------------------------
-// Cheb3D
+// Geodetic
 //--------------------------------------------------------------------------------
 // Proyecto-TTI
 //
 // Copyright (c) 2020, Meysam Mahooti
 //
-// Created: 2025/06/04
+// Created: 2025/06/05
 //
-/** @file Cheb3D.hpp
+/** @file Geodetic.hpp
  *  @brief This header file contains an auxiliar function used by EKF_GEOS3
  *
  *	@author Miguel de Pedro Olagaray
  *	@bug No knows bugs.
  */
 //--------------------------------------------------------------------------------
-#ifndef _Cheb3D_
-#define _Cheb3D_
+#ifndef _Geodetic_
+#define _Geodetic_
+
 
 #include "..\include\matrix.hpp"
+#include "..\include\SAT_Const.hpp"
+#include "..\include\Cheb3D.hpp"
+#include "../include/global.hpp"
 #include <cmath>
+#include <tuple>
 
 
 //-----------------------------------------------------------------------------------------------
-// Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matrix& Cz)
+// Geodetic(Matrix& r)
 //-----------------------------------------------------------------------------------------------
 /**
- *	@brief Chebyshev approximation of 3-dimensional vectors
+ *	@brief geodetic coordinates (Longitude [rad], latitude [rad], altitude [m])
+ *	       from given position vector (r [m])
  *
- *	@param [in] N       Number of coefficients
- *	@param [in] Ta      Begin interval
- *	@param [in] Tb      End interval
- *	@param [in] Cx      Coefficients of Chebyshev polyomial (x-coordinate)
- *	@param [in] Cy      Coefficients of Chebyshev polyomial (y-coordinate)
- *	@param [in] Cz      Coefficients of Chebyshev polyomial (z-coordinate)
+ *	@param [in] r         
  *
- *	@return Matrix& ChebApp   Chebyshev approximation of 3-dimensional vectors
+ *	@return double lon
+ *	@return double lat
+ *	@return double h 
  *
  */
 //-----------------------------------------------------------------------------------------------
-Matrix& Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matrix& Cz);
+tuple<double,double,double> Geodetic(Matrix& r);
 
 #endif

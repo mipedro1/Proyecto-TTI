@@ -8,7 +8,7 @@
 //
 // Created: 2025/06/04
 //
-/** @file Accel.h
+/** @file Accel.hpp
  *  @brief This header file contains an auxiliar function used by EKF_GEOS3
  *
  *	@author Miguel de Pedro Olagaray

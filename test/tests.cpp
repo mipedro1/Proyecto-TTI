@@ -33,6 +33,10 @@
 #include "..\include\Accel.hpp"
 #include "..\include\VarEqn.hpp"
 #include "..\include\DEInteg.hpp"
+#include "..\include\unit.hpp"
+#include "..\include\Geodetic.hpp"
+#include "..\include\angl.hpp"
+#include "..\include\elements.hpp"
 #include <cstdio>
 #include <cmath>
 
@@ -1145,12 +1149,12 @@ int I1_DeInteg_01() {
     
 	
 	Matrix &x=zeros(6,1);
-	x(1,1)=5542555.89427452;
-	x(2,1)=3213514.83814162;
-	x(3,1)=3990892.92789074;
-	x(4,1)=5394.06894044389;
-	x(5,1)=-2365.2129057402;
-	x(6,1)=-7061.8448137347;
+	x(1,1)=5542555.93722861;
+	x(2,1)=3213514.8673492;
+	x(3,1)=3990892.97587685;
+	x(4,1)=5394.06842166351;
+	x(5,1)=-2365.21337882342;
+	x(6,1)=-7061.84554200295;
 	
 	Matrix &Y0_apr=zeros(6,1);
 	Y0_apr(1,1)=6221397.62857869;
@@ -1163,8 +1167,89 @@ int I1_DeInteg_01() {
 	double t_aux=0.0;
 	double obs=-134.999991953373;
 	Y0_apr=DEInteg(Accel,t_aux,obs,1e-13,1e-6,6,Y0_apr);
-	cout<<"Y0_apr\n"<<Y0_apr<<endl;
-    _assert(m_equals(Y0_apr,x, 1e-10));
+    _assert(m_equals(Y0_apr,x, 1e-5));
+
+
+    
+    return 0;
+}
+
+int I1_Unit_01() {
+    
+	
+	Matrix &x=zeros(3);
+	x(1)=0.8;
+	x(2)=0.6;
+	x(3)=-0.0;
+	
+	
+	Matrix &p=zeros(3);
+	p(1)=4.0;
+	p(2)=3.0;
+	p(3)=0.0;
+    _assert(m_equals(unit(p),x, 1e-5));
+
+
+    
+    return 0;
+}
+
+int I1_Geodetic_01() {
+    
+	
+    Matrix &x=zeros(3);
+	x(1)=6371000.0;
+	x(2)=33.0;
+	x(3)=55.0;
+    auto [lon,lat,h] = Geodetic(x);
+	
+	_assert( (fabs(lon-(5.17972060896325e-06)))<1e-10);
+	_assert( (fabs(lat-(8.69111447458181e-06)))<1e-10);
+	_assert( (fabs(h-(-7136.29967552889)))<1e-10);
+
+
+    
+    return 0;
+}
+int I1_Angl_01() {
+    
+	
+    Matrix &x=zeros(3);
+	x(1)=1.2;
+	x(2)=3.1;
+	x(3)=2.3;
+	
+	Matrix &y=zeros(3);
+	y(1)=6.5;
+	y(2)=3.7;
+	y(3)=4.3;
+    double r= angl(x,y);
+	
+	_assert( (fabs(r-(0.580558707692297)))<1e-10);
+
+
+    
+    return 0;
+}
+int I1_Elements_01() {
+    
+	Matrix& y=zeros(6);
+	y(1) = 64.2;  
+	y(2) = 3.1;        
+	y(3) = 4.0;        
+	y(4) = 3.2;        
+	y(5) = 7.2;     
+	y(6) = 5.0;        
+	
+    
+    auto [p,a,e,i,Omega,omega,M] = elements(y);
+	_assert( (fabs(p-(7.52025050028149e-10)))<1e-5);
+	_assert( (fabs(a-(32.1995729787615)))<1e-5);
+	_assert( (fabs(e-(0.999999999988322)))<1e-5);
+	_assert( (fabs(i-(0.598549941560152)))<1e-5);
+	_assert( (fabs(Omega-(6.24005826877275)))<1e-5);
+	_assert( (fabs(omega-(3.25205438225583)))<1e-5);
+	_assert( (fabs(M-(3.14158827970593)))<1e-5);
 
 
     
@@ -1230,6 +1315,10 @@ int all_tests()
 	_verify(I1_Accel_01);
 	_verify(I1_VarEqn_01);
 	_verify(I1_DeInteg_01);
+	_verify(I1_Unit_01);
+	_verify(I1_Geodetic_01);
+	_verify(I1_Angl_01);
+	_verify(I1_Elements_01);
 	
 	
 

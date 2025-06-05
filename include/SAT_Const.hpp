@@ -1,3 +1,20 @@
+// $Header$
+//--------------------------------------------------------------------------------
+// SAT_Const
+//--------------------------------------------------------------------------------
+// Proyecto-TTI
+//
+// Copyright (c) 2020, Meysam Mahooti
+//
+// Created: 2025/06/04
+//
+/** @file SAT_Const.hpp
+ *  @brief This header file contains auxiliar data used by EKF_GEOS3
+ *
+ *	@author Miguel de Pedro Olagaray
+ *	@bug No knows bugs.
+ */
+//--------------------------------------------------------------------------------
 #ifndef SAT_CONST_HPP
 #define SAT_CONST_HPP
 

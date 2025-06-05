@@ -8,7 +8,7 @@
 //
 // Created: 2025/06/04
 //
-/** @file matrix.h
+/** @file matrix.hpp
  * @brief This class represents a mathematical matrix and provides various 
  *        matrix operations 
  *

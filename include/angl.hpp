@@ -1,44 +1,45 @@
 // $Header$
 //--------------------------------------------------------------------------------
-// Cheb3D
+// angl
 //--------------------------------------------------------------------------------
 // Proyecto-TTI
 //
 // Copyright (c) 2020, Meysam Mahooti
 //
-// Created: 2025/06/04
+// Created: 2025/06/05
 //
-/** @file Cheb3D.hpp
+/** @file angl.hpp
  *  @brief This header file contains an auxiliar function used by EKF_GEOS3
  *
  *	@author Miguel de Pedro Olagaray
  *	@bug No knows bugs.
  */
 //--------------------------------------------------------------------------------
-#ifndef _Cheb3D_
-#define _Cheb3D_
+#ifndef _Angl_
+#define _Angl_
+
 
 #include "..\include\matrix.hpp"
+#include "..\include\SAT_Const.hpp"
+#include "..\include\sign_.hpp"
+#include "../include/global.hpp"
 #include <cmath>
+#include <tuple>
 
 
 //-----------------------------------------------------------------------------------------------
-// Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matrix& Cz)
+// angl ( Matrix& vec1, Matrix& vec2 )
 //-----------------------------------------------------------------------------------------------
 /**
- *	@brief Chebyshev approximation of 3-dimensional vectors
+ *	@brief this function returns theta, an angle between the two vectors
  *
- *	@param [in] N       Number of coefficients
- *	@param [in] Ta      Begin interval
- *	@param [in] Tb      End interval
- *	@param [in] Cx      Coefficients of Chebyshev polyomial (x-coordinate)
- *	@param [in] Cy      Coefficients of Chebyshev polyomial (y-coordinate)
- *	@param [in] Cz      Coefficients of Chebyshev polyomial (z-coordinate)
+ *	@param [in] vec1         - vector 1   
+ *	@param [in] vec2         - vector 2
  *
- *	@return Matrix& ChebApp   Chebyshev approximation of 3-dimensional vectors
+ *	@return double theta        - angle between the two vectors  -pi to pi
  *
  */
 //-----------------------------------------------------------------------------------------------
-Matrix& Cheb3D(double t, int N, double Ta,double Tb, Matrix& Cx, Matrix& Cy,Matrix& Cz);
+double angl ( Matrix& vec1, Matrix& vec2 );
 
 #endif

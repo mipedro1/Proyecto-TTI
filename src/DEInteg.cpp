@@ -274,7 +274,6 @@
 		  }
 	  }
 	}
-	cout<<"beta\n"<<beta<<endl;
 	//                                                                   
 	// End block 0                                                       
 	//                                                                   
@@ -282,7 +281,7 @@
 	//                                                                   
 	// Repeat blocks 1, 2 (and 3) until step is successful               
 	//                                                                   
-	while(true){
+	while(true){	
 	  //                                                                 
 	  // Begin block 1                                                   
 	  //                                                                 

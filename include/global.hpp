@@ -8,7 +8,7 @@
 //
 // Created: 2025/06/04
 //
-/** @file global.h
+/** @file global.hpp
  *  @brief This header file contains auxiliar data used by EKF_GEOS3
  *
  *	@author Miguel de Pedro Olagaray
